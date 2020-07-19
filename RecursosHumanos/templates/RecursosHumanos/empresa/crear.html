@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<form method="POST" action="">
+       {% csrf_token %}
+       <h2 class="sr-only">Register</h2>
+
+            <div class="illustration"><i class="icon ion-ios-navigate" style="color: #ffc107;"></i></div>
+        {%for field in form%}
+            <div class="form-group">
+                {{ field }}
+            </div>
+    <script>
+
+        </script>
+    {%endfor%}
+     {{ form.errors }}
+    <div class="form-group"><input class="btn btn-warning btn-block" type="submit" value="Registrar Cuenta"></input></div>
+
+   </form>
+<script>
+
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder="Nombre Empresa"
+    form_fields[2].placeholder="rif"
+    form_fields[3].placeholder=""
+    form_fields[4].placeholder="Confirm Password"
+    form_fields[1].className='form-control'
+    form_fields[2].className='form-control'
+    form_fields[3].className='form-control'
+    form_fields[4].className='form-control'
+    form_fields[5].className='form-control'
+</script>
+
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+
+{% endblock %}
