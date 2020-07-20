@@ -23,7 +23,7 @@ class Prenomina(models.Model):
         sumatoria = Prenomina.objects.filter(pk=self.codigo_prenomina).aggregate(Sum('pagos_empleados__monto'))
         return float(sumatoria['pagos_empleados__monto__sum'])
 
-    def sumatoria_all():
+    def sumatoria_all(self):
         return Prenomina.objects.aggregate(Sum('pagos_empleados__monto'))
 
     def count():
@@ -33,6 +33,8 @@ class Prenomina(models.Model):
         return Prenomina.objects.filter(pagos_empleados__elemento_pago__codigo_ad='asignacion').aggregate(
             Count('pagos_empleados__cod_empleado'))
 
+    def __str__(self):
+        return '%s - %s' % (self.descripcion, self.fecha_final)
 
     class Meta:
          db_table = 'pre_nomina'
@@ -46,7 +48,8 @@ class Nomina(models.Model):
     codigo_prenomina = models.ForeignKey(Prenomina, verbose_name='Prenomina Procesada', on_delete=models.CASCADE)
     procesado = models.BooleanField(verbose_name='Procesar Nomina')
 
-
+    def __str__(self):
+        return '%s - %s' % (self.codigo_prenomina.descripcion, self.codigo_prenomina.fecha_final)
     class Meta:
         db_table = 'nomina'
 

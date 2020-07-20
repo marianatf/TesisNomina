@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_title %} Conceptos Pagos {% endblock %}
+
+{% block title_page %} Conceptos de Pago  {% endblock %}
+{% block subtitle_page %} Crear conceptos de pago {% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <h5>Información General</h5>
+        <span>Agregar, actualizar y/o eliminar conceptos de pago.</span>
+           <div style="text-align: right;"><a href="{%url 'Crear ElementoPago'%}"><button class="btn btn-primary btn-round">Crear Concepto de Pago</button></a></div>
+    </div>
+
+    <div class="card-block">
+        <div class="dt-responsive table-responsive">
+            <table id="base-style" class="table table-striped table-bordered nowrap">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripcion</th>
+                        <th>Asignacion/Deduccion</th>
+                        <th>Frecuencia</th>
+                        <th>Tipo</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in objects %}
+                    <tr>
+                            <td>{{ object.pk }}</td>
+                            <td>{{ object.descripcion |title }}</td>
+                            <td>{{ object.get_codigo_ad_display }}</td>
+                            <td>{{ object.get_frecuencia_display }}</td>
+                            <td>{{ object.get_codigo_fv_display }}</td>
+                            <td><a href="{% url 'Editar ElementoPago' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
+                                <a href="{% url 'Eliminar ElementoPago' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripcion</th>
+                        <th>Asignacion/Deduccion</th>
+                        <th>Frecuencia</th>
+                        <th>Tipo</th>
+                        <th>Acción</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+    <script src="{% static 'bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'bower_components/datatables.net-buttons/js/dataTables.buttons.min.js'%}"></script>
+{% endblock %}

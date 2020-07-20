@@ -32,8 +32,6 @@ class Persona(models.Model):
     STATUS = (
         ('trabajando', 'Trabajando'),
         ('desempleado', 'Desempleado'),
-        ('ingresado', 'Ingresado'),
-
     )
     GENERO = (
         ('masculino', 'Masculino'),
@@ -41,7 +39,7 @@ class Persona(models.Model):
         ('otro', 'Otro'),
         ('ninguno', 'Prefiero No Responder'),
     )
-    status = models.CharField(choices=STATUS, max_length=30, default='desempleado', verbose_name='Estado De La Persona')
+    status = models.CharField(blank=True, null=True, choices=STATUS, max_length=30, default='desempleado', verbose_name='Estado De La Persona')
     cedula = models.IntegerField(blank=True, null=True, verbose_name='Cedula')
     apellido = models.CharField(max_length=30, verbose_name='Primer Apellido')
     nombre = models.CharField(max_length=30, verbose_name='Primer Nombre')
@@ -51,8 +49,8 @@ class Persona(models.Model):
     edad = models.IntegerField(blank=True, null=True, verbose_name='Edad')
     ocupacion_actual = models.CharField(max_length=30, verbose_name='Ocupacion Actual', blank=True, null=True)
     cargo_optar = models.CharField(max_length=30, verbose_name='Cargo a Optar', blank=True, null=True)
-    email = models.EmailField(blank=True, null=True, verbose_name='Email')
-    telefono = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefono')
+    email = models.EmailField(verbose_name='Email')
+    telefono = models.CharField(max_length=30, verbose_name='Telefono')
     genero = models.CharField(choices=GENERO, max_length=50, null=True, blank=True)
     fecha_ingreso = models.DateField(auto_now=True)
     imagen = models.ImageField(upload_to='empleados', blank=True, null=True)
@@ -65,7 +63,10 @@ class Persona(models.Model):
         if self.imagen:
             return mark_safe('<img src="%s" style="width: 45px; height:45px; margin-left: 30px" />' % self.imagen.url)
         else:
-            return 'No Existe Imagen'
+            return 'No Existe'
+
+    def __str__(self):
+            return '%s, %s, %s, %s' % (self.nombre, self.segundo_nombre, self.apellido, self.segundo_apellido)
 
     imagen_tag.short_description = 'Imagen'
     imagen_tag.allow_tags = True
@@ -130,7 +131,6 @@ class Escala(models.Model):
     grado = models.IntegerField(verbose_name='Grado')
     paso = models.IntegerField(verbose_name='Paso')
     sueldo = models.DecimalField(decimal_places=2, max_digits=20, verbose_name='Sueldo Base')
-    porcentaje = models.BooleanField(blank=True, null=True, verbose_name='Porcentaje', default=0)
 
     def save(self, *args, **kwargs):
         if self.porcentaje == 1:
@@ -196,7 +196,7 @@ class Rac(models.Model):
         super(Rac, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ' Puesto: %s, Cargo: %s  , Departamento: %s, Sueldo: %s' % (self.codigo_rac, self.codigo_cargo, self.codigo_departamento)
+        return ' %s.- %s  , Departamento: %s' % (self.codigo_rac, self.codigo_cargo, self.codigo_departamento)
 
     class Meta:
         ordering = ['codigo_rac','codigo_departamento']
@@ -237,23 +237,25 @@ class Empleado(models.Model):
     status_trabajador = models.CharField(choices=STATUSE, max_length=30, default='Trabajando', verbose_name='Estado De La Persona')
     direccion = models.TextField(blank=True, null=True, verbose_name='Direccion')
 
-    def save(self, *args, **kwargs):
-        if self.codigo_rac:
-            self.sueldo = self.codigo_rac.sueldo
-        super(Empleado, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.codigo_rac:
+    #         self.sueldo = self.codigo_rac.sueldo
+    #     super(Empleado, self).save(*args, **kwargs)
 
-        # def __str__(self):
+    def nombre_completo(self):
+        return '%s %s ' % (self.nombre, self.apellido)
 
-    #     return '  %s' % (self.codigo_empleado)
+    def __str__(self):
+        return '%s %s %s' % (self.codigo_empleado, self.nombre, self.apellido)
 
-    def imagen_tag(self):
-        if self.imagen:
-            return mark_safe('<img src="%s" style="width: 45px; height:45px; margin-left: 30px" />' % self.imagen.url)
-        else:
-            return 'No Existe Imagen'
-
-    imagen_tag.short_description = 'Imagen'
-    imagen_tag.allow_tags = True
+    # def imagen_tag(self):
+    #     if self.imagen:
+    #         return mark_safe('<img src="%s" style="width: 45px; height:45px; margin-left: 30px" />' % self.imagen.url)
+    #     else:
+    #         return 'No Existe Imagen'
+    #
+    # imagen_tag.short_description = 'Imagen'
+    # imagen_tag.allow_tags = True
 
     class Meta:
         verbose_name = "Empleado"
@@ -295,70 +297,70 @@ class EducacionEmpleado(models.Model):
         db_table = 'educacion_empleado'
 
 
+#
+# def add_familia(sender, instance, *args, **kwargs):
+#     if instance.persona.status == 'ingresado':
+#         familiares = Familia.objects.filter(persona=instance.persona.pk)
+#         empleados = Empleado.objects.get(codigo_solicitud=instance.persona.pk)
+#         for familia in familiares:
+#             b = FamiliaEmpleado.objects.get_or_create(
+#                 persona=empleados,
+#                 cedula=familia.cedula,
+#                 apellido=familia.apellido,
+#                 segundo_apellido=familia.segundo_apellido,
+#                 nombre=familia.nombre,
+#                 segundo_nombre=familia.segundo_nombre,
+#                 fecha_nacimiento=familia.fecha_nacimiento)[0]
+#             b.save()
+#
+#
+# def add_educacion(sender, instance, *args, **kwargs):
+#     if instance.persona.status == 'ingresado':
+#         edu = Educacion.objects.filter(persona=instance.persona.pk)
+#         empleados = Empleado.objects.get(codigo_solicitud=instance.persona.pk)
+#         for educacion in edu:
+#             b = EducacionEmpleado.objects.get_or_create(
+#                 persona=empleados,
+#                 titulo=educacion.titulo,
+#                 finalizado=educacion.finalizado,
+#                 fecha_inicio=educacion.fecha_inicio,
+#                 fecha_fin=educacion.fecha_fin,
+#                 aptitudes=educacion.aptitudes)[0]
+#             b.save()
+#
+#
+# def add_empleados(sender, instance, *args, **kwargs):
+#     if instance.status == 'ingresado':
+#         a = Empleado.objects.get_or_create(
+#             cedula=instance.cedula,
+#             codigo_solicitud=instance,
+#             apellido=instance.apellido,
+#             segundo_apellido=instance.segundo_apellido,
+#             nombre=instance.nombre_1,
+#             segundo_nombre=instance.segundo_nombre,
+#             fecha_ingreso=instance.fecha_ingreso,
+#             codigo_empresa=instance.codigo_empresa,
+#             fecha_nacimiento=instance.fecha_nacimiento,
+#             edad=instance.edad,
+#             email=instance.email,
+#             telefono=instance.telefono,
+#             genero=instance.genero,
+#             status_empleado='nuevo_ingreso',
+#             sueldo=0,
+#             imagen=instance.imagen
+#         )[0]
+#         a.save()
+#
 
-def add_familia(sender, instance, *args, **kwargs):
-    if instance.persona.status == 'ingresado':
-        familiares = Familia.objects.filter(persona=instance.persona.pk)
-        empleados = Empleado.objects.get(codigo_solicitud=instance.persona.pk)
-        for familia in familiares:
-            b = FamiliaEmpleado.objects.get_or_create(
-                persona=empleados,
-                cedula=familia.cedula,
-                apellido=familia.apellido,
-                segundo_apellido=familia.segundo_apellido,
-                nombre=familia.nombre,
-                segundo_nombre=familia.segundo_nombre,
-                fecha_nacimiento=familia.fecha_nacimiento)[0]
-            b.save()
-
-
-def add_educacion(sender, instance, *args, **kwargs):
-    if instance.persona.status == 'ingresado':
-        edu = Educacion.objects.filter(persona=instance.persona.pk)
-        empleados = Empleado.objects.get(codigo_solicitud=instance.persona.pk)
-        for educacion in edu:
-            b = EducacionEmpleado.objects.get_or_create(
-                persona=empleados,
-                titulo=educacion.titulo,
-                finalizado=educacion.finalizado,
-                fecha_inicio=educacion.fecha_inicio,
-                fecha_fin=educacion.fecha_fin,
-                aptitudes=educacion.aptitudes)[0]
-            b.save()
-
-
-def add_empleados(sender, instance, *args, **kwargs):
-    if instance.status == 'ingresado':
-        a = Empleado.objects.get_or_create(
-            cedula=instance.cedula,
-            codigo_solicitud=instance,
-            apellido=instance.apellido,
-            segundo_apellido=instance.segundo_apellido,
-            nombre=instance.nombre_1,
-            segundo_nombre=instance.segundo_nombre,
-            fecha_ingreso=instance.fecha_ingreso,
-            codigo_empresa=instance.codigo_empresa,
-            fecha_nacimiento=instance.fecha_nacimiento,
-            edad=instance.edad,
-            email=instance.email,
-            telefono=instance.telefono,
-            genero=instance.genero,
-            status_empleado='nuevo_ingreso',
-            sueldo=0,
-            imagen=instance.imagen
-        )[0]
-        a.save()
-
-
-def change_bool_rac(sender, instance, *args, **kwargs):
-    if instance.codigo_rac:
-        a = Rac.objects.update_or_create(pk=instance.codigo_rac.pk)[0]
-        a.ocupado = True
-        a.save()
-
-
-post_save.connect(change_bool_rac, sender=Empleado)
-post_save.connect(add_empleados, sender=Persona)
-post_save.connect(add_educacion, sender=Educacion)
-post_save.connect(add_familia, sender=Familia)
+# def change_bool_rac(sender, instance, *args, **kwargs):
+#     if instance.codigo_rac:
+#         a = Rac.objects.update_or_create(pk=instance.codigo_rac.pk)[0]
+#         a.ocupado = True
+#         a.save()
+#
+#
+# post_save.connect(change_bool_rac, sender=Empleado)
+# post_save.connect(add_empleados, sender=Persona)
+# post_save.connect(add_educacion, sender=Educacion)
+# post_save.connect(add_familia, sender=Familia)
 

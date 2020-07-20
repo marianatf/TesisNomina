@@ -16,7 +16,7 @@ from django.db.models import Count, Sum
 #     EducacionEmpleado
 #
 # )
-#
+from .models import *
 #
 # @admin.register(Empresa)
 # class EmpresaAdmin(admin.ModelAdmin):
@@ -44,9 +44,9 @@ from django.db.models import Count, Sum
 #     )
 #
 #
-# @admin.register(Persona)
-# class PersonaAdmin(admin.ModelAdmin):
-#     list_display = ['cod_solicitud', 'cod_empresa', 'nombre_1', 'cedula', 'apellido_1', 'status', 'imagen_tag']
+@admin.register(Persona)
+class PersonaAdmin(admin.ModelAdmin):
+     list_display = ['codigo_solicitud', 'status', 'imagen_tag']
 #     ordering = ['status', 'cod_solicitud', ]
 #     list_filter = ['status', ]
 #     search_fields = ['nombre_1', 'cedula', 'cod_solicitud', 'cargo_opt']

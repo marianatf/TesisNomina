@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load widget_tweaks  %}
+{% block head_title %} Escala {% endblock %}
+{% load static %}
+{% block title_page %} Nueva Escala {% endblock %}
+{% block subtitle_page %} Planilla de Escala Sueldo {% endblock %}
+
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h5>* Campo Obligatorio</h5>
+        <span></span>
+        <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
+    </div>
+    <div class="card-block">
+        <form method='POST' action='' >
+            {% csrf_token %}
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Escala *</label>
+        <div class="col-sm-10">
+        {% render_field form.escala class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Grado *</label>
+        <div class="col-sm-10">
+        {% render_field form.grado class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Paso *</label>
+        <div class="col-sm-10">
+        {% render_field form.paso class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Sueldo *</label>
+        <div class="col-sm-10">
+        {% render_field form.sueldo class="form-control" type="text" %}
+        </div>
+    </div>
+
+    <div class="form-group">
+            <input class="btn btn-success btn-round btn-block" type="submit" value="Guardar"></input>
+    </div>
+</form>
+</div>
+</div>
+
+
+{% endblock %}

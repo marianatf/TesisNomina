@@ -9513,7 +9513,7 @@ DefaultSettings.prototype = {
   filters: void 0,
 
   /**
-   * It allows Handsontable to process formula expressions defined in the provided data.
+   * It allows Handsontable to process formulacion expressions defined in the provided data.
    *
    * @pro
    * @since 1.7.0

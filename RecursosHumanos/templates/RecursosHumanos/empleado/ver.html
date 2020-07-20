@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load widget_tweaks  %}
+{% block head_title %} Candidato {{object.pk}} {% endblock %}
+{% load static %}
+{% block title_page %} Información Empleado {% endblock %}
+{% block subtitle_page %}  {% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-lg-12">
+    <div class="cover-profile">
+        <div class="profile-bg-img">
+            <img class="profile-bg-img img-fluid" src="{% static 'assets/images/user-profile/bg-img.jpg' %}" alt="bg-img">
+            <div class="card-block user-info">
+                <div class="col-md-12">
+                    <div class="media-left">
+                        <a href="#" class="profile-image">
+                            <img class="user-img img-radius" src="{% static 'assets/images/user-profile/user.png' %}" style="width: 100px; height:100px;" alt="user-img">
+                        </a>
+                    </div>
+                    <div class="media-body row">
+                        <div class="col-lg-12">
+                            <div class="user-title">
+                                <h2>{{object.nombre |title}} {{object.segundo_nombre |title}} {{object.apellido |title}} {{object.segundo_apellido |title}}</h2>
+                                <span class="text-white">{{object.ocupacion_actual |title}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="card">
+    <div class="card-header">
+    </div>
+    <div class="card-block">
+        <div class="view-info">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="general-info">
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Nombre</th>
+                                                <td>{{object.nombre |title}} {{object.segundo_nombre |title}} {{object.apellido |title}} {{object.segundo_apellido |title}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Género</th>
+                                                <td>{{object.get_genero_display}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Fecha de Nacimiento</th>
+                                                <td>{{object.fecha_nacimiento}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Edad</th>
+                                                <td>{{object.edad}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Dirección</th>
+                                                <td>{{object.direccion |title}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">fecha_ingreso</th>
+                                                <td>{{object.direccion |title}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                             <tr>
+                                                <th scope="row">E-mail</th>
+                                                <td>{{object.email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Teléfono</th>
+                                                <td>{{object.telefono}}</td>
+                                            </tr>
+                                             <tr>
+                                                <th scope="row">Estado Laboral</th>
+                                                <td>{{object.status_trabajador |title}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">RAC</th>
+                                                <td>{{object.codigo_rac |title}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Sueldo</th>
+                                                <td>{{object.sueldo |title}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                        </div>
+                        <!-- end of row -->
+                    </div>
+                    <!-- end of general info -->
+                </div>
+                <!-- end of col-lg-12 -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of view-info -->
+
+        <!-- end of edit-info -->
+    </div>
+    <!-- end of card-block -->
+</div>
+{% endblock %}

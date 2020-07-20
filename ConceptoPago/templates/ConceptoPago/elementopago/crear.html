@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load widget_tweaks  %}
+{% block head_title %} Crear Concepto Pago {% endblock %}
+{% load static %}
+{% block title_page %} Nuevo Concepto Pago {% endblock %}
+{% block subtitle_page %} Creación de Concepto Pago {% endblock %}
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/SelectFilter2.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/SelectBox.js' %}"></script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h5>* Campo Obligatorio</h5>
+        <span></span>
+        <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
+    </div>
+    <div class="card-block">
+        <form method='POST' >
+            {% csrf_token %}
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Descripcion *</label>
+        <div class="col-sm-10">
+        {% render_field form.descripcion class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Asignacion/Deduccion *</label>
+        <div class="col-sm-10">
+        {% render_field form.codigo_ad class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Formula *</label>
+        <div class="col-sm-10">
+        {% render_field form.codigo_formula class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Frecuencia *</label>
+        <div class="col-sm-10">
+        {% render_field form.frecuencia class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Tipo Concepto Pago *</label>
+        <div class="col-sm-10">
+        {% render_field form.codigo_fv class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Empleados *</label>
+        <div class="col-sm-10">
+        {{form.empleado_pago}}
+        </div>
+    </div>
+    <div class="form-group">
+            <input class="btn btn-success btn-round btn-block" type="submit" value="Guardar"></input>
+    </div>
+</form>
+</div>
+    {{form.errors}}
+
+</div>
+
+<script type="text/javascript">
+    addEvent(window, "load", function(e) { SelectFilter.init("id_empleado_pago", "empleado_pago", 0, "{% static 'admin/'%}"); });
+</script>
+{% endblock %}

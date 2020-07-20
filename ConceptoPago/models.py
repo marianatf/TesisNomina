@@ -24,13 +24,14 @@ class Formulacion(models.Model):
     formula = models.CharField(max_length=250)
     descripcion = models.CharField(max_length=250, default='prueba')
 
+    def __str__(self):
+        return '%s %s ' % (self.codigo_formula, self.descripcion)
+
     class Meta:
         verbose_name = "Formulacion"
         verbose_name_plural = "Formulaciones"
-        db_table = 'formula'
 
-    def __str__(self):
-        return self.descripcion
+
 
 
 class ElementoPago(models.Model):

@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 # from .models import BlogPost
-#
-
 from .models import *
 
 
@@ -14,6 +12,35 @@ class EmpresaForm(forms.ModelForm):
 class IngresoEmpresaForm(forms.Form):
     empresa = forms.ModelChoiceField(queryset=Empresa.objects.all(), empty_label="Empresas")
 
+class PersonaForm(forms.ModelForm):
+    class Meta:
+        model = Persona
+        fields = ['codigo_solicitud', 'status', 'cedula', 'apellido', 'nombre', 'segundo_nombre', 'segundo_apellido', 'fecha_nacimiento', 'edad', 'ocupacion_actual', 'cargo_optar', 'email', 'telefono', 'genero', 'imagen', 'direccion']
+
+class EscalaForm(forms.ModelForm):
+    class Meta:
+        model = Escala
+        fields = ['escala', 'grado', 'paso', 'sueldo']
+
+class DepartamentoForm(forms.ModelForm):
+    class Meta:
+        model = Departamento
+        fields = ['descripcion', 'cantidad_empleado', 'presupuesto']
+
+class CargoForm(forms.ModelForm):
+    class Meta:
+        model = Cargo
+        fields = ['cargo', 'descripcion']
+
+class RacForm(forms.ModelForm):
+    class Meta:
+        model = Rac
+        fields = ['codigo_departamento', 'codigo_cargo', 'codigo_escala', 'compensacion', 'cargo_ocupado']
+
+class EmpleadoForm(forms.ModelForm):
+    class Meta:
+        model = Empleado
+        fields = ['cedula', 'codigo_solicitud', 'apellido', 'nombre', 'segundo_apellido', 'segundo_nombre', 'codigo_solicitud', 'codigo_rac', 'sueldo', 'fecha_nacimiento', 'edad', 'email', 'telefono', 'genero', 'imagen', 'status_trabajador', 'direccion','fecha_ingreso']
 
 
 # class BlogPostForm(forms.Form):

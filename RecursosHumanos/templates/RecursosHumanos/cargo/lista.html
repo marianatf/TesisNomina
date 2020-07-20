@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_title %} Cargos {% endblock %}
+
+{% block title_page %} Cargos {% endblock %}
+{% block subtitle_page %} Totalidad de cargos {% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <h5>Información General</h5>
+        <span>Agregar, actualizar y/o eliminar cargos.</span>
+           <div style="text-align: right;"><a href="{%url 'Crear Cargo'%}"><button class="btn btn-primary btn-round">Crear Cargo</button></a></div>
+    </div>
+
+    <div class="card-block">
+        <div class="dt-responsive table-responsive">
+            <table id="base-style" class="table table-striped table-bordered nowrap">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Cargo</th>
+                        <th>Descripción</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in objects %}
+                    <tr>
+                            <td>{{ object.pk }}</td>
+                            <td>{{ object.cargo |title }}</td>
+                            <td>{{ object.descripcion |title }}</td>
+                            <td><a href="{% url 'Editar Cargo' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
+                                <a href="{% url 'Eliminar Cargo' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Código</th>
+                        <th>Cargo</th>
+                        <th>Descripción</th>
+                        <th>Acción</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+    <script src="{% static 'bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'bower_components/datatables.net-buttons/js/dataTables.buttons.min.js'%}"></script>
+{% endblock %}

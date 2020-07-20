@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load widget_tweaks  %}
+{% block head_title %} Eliminar {{object.pk}} {% endblock %}
+{% load static %}
+{% block title_page %} Eliminar {{object.get_escala_display}}, {{object.grado}} , {{object.paso}}  {% endblock %}
+{% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente la escala de sueldo?  {% endblock %}
+
+{% block content %}
+<form method='POST' >{% csrf_token %}
+
+    <button class='btn btn-danger btn-round'>Sí, Eliminar</button>
+
+</form>
+{% endblock %}
