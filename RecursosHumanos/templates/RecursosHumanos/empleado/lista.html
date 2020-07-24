@@ -34,9 +34,9 @@
                         <td> <a>{{ object.pk }} </a></td>
                             <td>{{ object.nombre |title }}</td>
                             <td>{{ object.apellido |title }}</td>
-                            <td>{{ object.rac }}</td>
+                            <td>{{ object.codigo_rac }}</td>
                             <td>{{ object.sueldo }}</td>
-                            <td>{{ object.get_status_display }}</td>
+                            <td>{{ object.get_status_trabajador_display }}</td>
                             <td><a href="{% url 'Ver Empleado' object.pk %}"><i style="font-size: 20px; margin-right: 15px;"class="fa fa-eye"></i></a>
                                 <a href="{% url 'Editar Empleado' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
                                 <a href="{% url 'Eliminar Empleado' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>

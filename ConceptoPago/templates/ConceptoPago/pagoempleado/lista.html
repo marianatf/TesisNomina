@@ -2,16 +2,16 @@
 {% load static %}
 {% block head_title %} Pago de Empleado {% endblock %}
 
-{% block title_page %} Pagos Dirigidos a empleados  {% endblock %}
-{% block subtitle_page %} Enlazar empleados y pagos {% endblock %}
+{% block title_page %} Pago de Empleado  {% endblock %}
+{% block subtitle_page %} Enlace entre pagos y empleados. {% endblock %}
 
 {% block content %}
 
 <div class="card">
     <div class="card-header">
         <h5>Información General</h5>
-        <span>Agregar, actualizar y/o eliminar pagos de empleados.</span>
-           <div style="text-align: right;"><a href="{%url 'Crear PagoEmpleado'%}"><button class="btn btn-primary btn-round">Crear Concepto de Pago</button></a></div>
+        <span>Agregar, actualizar y/o eliminar pagos.</span>
+           <div style="text-align: right;"><a href="{%url 'Crear PagoEmpleado'%}"><button class="btn btn-primary btn-round">Crear Pago</button></a></div>
     </div>
 
     <div class="card-block">

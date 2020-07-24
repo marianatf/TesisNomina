@@ -18,8 +18,6 @@ class Empresa(models.Model):
     proposito = models.TextField(verbose_name='Proposito de la Empresa')
     fecha_update = models.DateField(auto_now=True)
 
-    def __str__(self):
-        return self.pk
 
     class Meta:
         verbose_name = "Empresa"
@@ -132,13 +130,6 @@ class Escala(models.Model):
     paso = models.IntegerField(verbose_name='Paso')
     sueldo = models.DecimalField(decimal_places=2, max_digits=20, verbose_name='Sueldo Base')
 
-    def save(self, *args, **kwargs):
-        if self.porcentaje == 1:
-            self.sueldo = self.sueldo / 100
-        else:
-            pass
-        super(Escala, self).save(*args, **kwargs)
-
     class Meta:
         ordering = ['escala']
         unique_together = ['escala', 'grado', 'paso']
@@ -196,7 +187,7 @@ class Rac(models.Model):
         super(Rac, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ' %s.- %s  , Departamento: %s' % (self.codigo_rac, self.codigo_cargo, self.codigo_departamento)
+        return ' %s.- %s  , %s' % (self.codigo_rac, self.codigo_cargo, self.codigo_departamento)
 
     class Meta:
         ordering = ['codigo_rac','codigo_departamento']

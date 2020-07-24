@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block head_title %} Conceptos Pagos {% endblock %}
+{% block head_title %} Elementos de Pago {% endblock %}
 
-{% block title_page %} Conceptos de Pago  {% endblock %}
-{% block subtitle_page %} Crear conceptos de pago {% endblock %}
+{% block title_page %} Elementos de Pago  {% endblock %}
+{% block subtitle_page %} Crear elementos de pago {% endblock %}
 
 {% block content %}
 
 <div class="card">
     <div class="card-header">
         <h5>Información General</h5>
-        <span>Agregar, actualizar y/o eliminar conceptos de pago.</span>
-           <div style="text-align: right;"><a href="{%url 'Crear ElementoPago'%}"><button class="btn btn-primary btn-round">Crear Concepto de Pago</button></a></div>
+        <span>Agregar, actualizar y/o eliminar elementos de pago.</span>
+           <div style="text-align: right;"><a href="{%url 'Crear ElementoPago'%}"><button class="btn btn-primary btn-round">Crear Elemento</button></a></div>
     </div>
 
     <div class="card-block">
@@ -20,8 +20,8 @@
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <th>Descripcion</th>
-                        <th>Asignacion/Deduccion</th>
+                        <th>Descripción</th>
+                        <th>Asignación/Deducción</th>
                         <th>Frecuencia</th>
                         <th>Tipo</th>
                         <th>Acción</th>
@@ -44,8 +44,8 @@
                 <tfoot>
                     <tr>
                         <th>Código</th>
-                        <th>Descripcion</th>
-                        <th>Asignacion/Deduccion</th>
+                        <th>Descripción</th>
+                        <th>Asignación/Deducción</th>
                         <th>Frecuencia</th>
                         <th>Tipo</th>
                         <th>Acción</th>

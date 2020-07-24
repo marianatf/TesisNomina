@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block head_title %} Nomina {% endblock %}
+{% block head_title %} Nómina {% endblock %}
 
-{% block title_page %} Nomina de empleados  {% endblock %}
-{% block subtitle_page %} {% endblock %}
+{% block title_page %} Nómina de empleados  {% endblock %}
+{% block subtitle_page %} Nómina de empleados final {% endblock %}
 
 {% block content %}
 
 <div class="card">
     <div class="card-header">
         <h5>Información General</h5>
-        <span>Agregar y ver  nominas.</span>
-           <div style="text-align: right;"><a href="{%url 'Crear Nomina'%}"><button class="btn btn-primary btn-round">Ejecutar Nomina</button></a></div>
+        <span>Agregar y visualizar las nóminas de empleados.</span>
+           <div style="text-align: right;"><a href="{%url 'Crear Nomina'%}"><button class="btn btn-primary btn-round">Agregar Nómina</button></a></div>
     </div>
 
     <div class="card-block">
@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <th>Prenomina</th>
+                        <th>Pre-nómina</th>
                         <th>Procesado</th>
                         <th>Acción</th>
                     </tr>
@@ -39,7 +39,7 @@
                 <tfoot>
                     <tr>
                         <th>Código</th>
-                        <th>Prenomina</th>
+                        <th>Pre-nómina</th>
                         <th>Procesado</th>
                         <th>Acción</th>
                     </tr>

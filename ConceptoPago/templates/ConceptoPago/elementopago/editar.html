@@ -18,19 +18,19 @@
             {% csrf_token %}
 
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Descripcion *</label>
+        <label class="col-sm-2 col-form-label">Descripción *</label>
         <div class="col-sm-10">
         {% render_field form.descripcion class="form-control" type="text" %}
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Asignacion/Deduccion *</label>
+        <label class="col-sm-2 col-form-label">Asignación / Deducción *</label>
         <div class="col-sm-10">
         {% render_field form.codigo_ad class="form-control" type="text" %}
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Formula *</label>
+        <label class="col-sm-2 col-form-label">Fórmula *</label>
         <div class="col-sm-10">
         {% render_field form.codigo_formula class="form-control" type="text" %}
         </div>
@@ -42,13 +42,13 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Tipo Concepto Pago *</label>
+        <label class="col-sm-2 col-form-label">Tipo *</label>
         <div class="col-sm-10">
         {% render_field form.codigo_fv class="form-control" type="text" %}
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Empleados *</label>
+        <label class="col-sm-2 col-form-label">Seleccionar Empleados *</label>
         <div class="col-sm-10">
         {% render_field form.empleado_pago class="form-control" type="text" %}
         </div>
@@ -58,7 +58,6 @@
     </div>
 </form>
 </div>
-    {{form.errors}}
 
 </div>
 

@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load widget_tweaks  %}
-{% block head_title %} Candidato {{object.pk}} {% endblock %}
+{% block head_title %} Pre-nómina {{object.pk}} {% endblock %}
 {% load static %}
-{% block title_page %} Información Prenomina {% endblock %}
+{% block title_page %} Información Pre-nómina {% endblock %}
 {% block subtitle_page %} {% endblock %}
 
 {% block content %}
 <div class="card">
     <div class="card-header">
-            <span>Fecha {{object.fecha_final}} <br> Monto Total {{total_emp}} <br> Descripcion {{object.descripcion}}</span>
+            <span>Fecha: {{object.fecha_final}} <br> Monto Total = {{total_emp}} <br> Descripción: {{object.descripcion}}</span>
         <div style="text-align: right;"><a href="{%url 'Pdf Todos' object.pk %}"><button class="btn btn-primary btn-round">Exportar PDF</button></a></div>
     </div>
     <div class="card-block">

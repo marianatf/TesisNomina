@@ -3,7 +3,7 @@
 {% block head_title %} Eliminar {{object.pk}} {% endblock %}
 {% load static %}
 {% block title_page %} Eliminar {{object.descripcion |title}}  {% endblock %}
-{% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente el concepto pago?  {% endblock %}
+{% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente el concepto de pago seleccionado?  {% endblock %}
 
 {% block content %}
 <form method='POST' >{% csrf_token %}

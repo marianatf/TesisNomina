@@ -44,6 +44,9 @@ from .models import *
 #     )
 #
 #
+@admin.register(Empresa)
+class EmpresaAdmin(admin.ModelAdmin):
+     pass
 @admin.register(Persona)
 class PersonaAdmin(admin.ModelAdmin):
      list_display = ['codigo_solicitud', 'status', 'imagen_tag']

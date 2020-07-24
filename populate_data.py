@@ -63,6 +63,7 @@ def add_persona():
 									  email=fakegen.email(),
 									  telefono=fakegen.phone_number(),
 									  genero=random.choice(generos),
+									  edad=fakegen.random_digit_not_null()+20
 
 									  )[0]
 	a.save()
@@ -164,22 +165,23 @@ def empleado(rac):
 									  telefono=fakegen.phone_number(),
 									  genero=random.choice(generos),
 									  codigo_rac=rac,
-									sueldo=fakegen.random_digit_not_null()*100)[0]
+									sueldo=fakegen.random_digit_not_null()*100,
+									   edad=fakegen.random_digit_not_null()+20)[0]
 	a.save()
 	print(a)
 	return a
 
 
-for a in range(1, 20):
-	cantidad_v = random.choice(CANTIDAD)
-	personac = add_persona()
-	for a in range(1, cantidad_v):
-		add_familia(personac)
-	add_educacion(personac)
+# for a in range(1, 10):
+# 	cantidad_v = random.choice(CANTIDAD)
+# 	personac = add_persona()
+# 	for a in range(1, cantidad_v):
+# 		add_familia(personac)
+# 	empleado(rac(add_escalas(1),add_cargo(),add_departamento()))
+
+
+for a in range(1, 10):
 	empleado(rac(add_escalas(1),add_cargo(),add_departamento()))
-
-
-
 
 #add_escalas()
 # if __name__ == '__main__':

@@ -9,9 +9,26 @@ from xhtml2pdf import pisa
 from io import BytesIO
 from django.template.loader import get_template
 from django.views import View
-
+from ProcesoNomina.models import *
+from django.db.models import Sum
 def home(request):
+    solicitud = Persona.objects.all().count()
+    empleados = Empleado.objects.all().count()
+    departamento = Departamento.objects.all().count()
+    rac = Rac.objects.all().filter(cargo_ocupado=False).count()
+    empresa = get_object_or_404(Empresa, pk=1)
+    total_empleados = Prenomina.objects.all().prefetch_related('pagos_empleados').aggregate(Sum('pagos_empleados__monto'))['pagos_empleados__monto__sum']
+    nomina = Nomina.objects.all().count()
+
     context = {
+        'objectpersona':solicitud,
+        'objectempleados': empleados,
+        'objectrac':rac,
+        'objectdepartamento':departamento,
+        'object':empresa,
+        'total':total_empleados,
+        'total_n':nomina
+
     }
     return render(request, 'RecursosHumanos/home.html', context)
 

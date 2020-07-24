@@ -52,7 +52,7 @@ urlpatterns = [
     path('empleado/', EmpleadoLista, name='Lista Empleado'),
     path('empleado/crear', EmpleadoCrear, name='Crear Empleado'),
     path('empleado/editar/<int:pk>', EmpleadoEditar, name='Editar Empleado'),
-    path('empleado/eliminar/<int:pk>', EmpleadoEditar, name='Eliminar Empleado'),
+    path('empleado/eliminar/<int:pk>', EmpleadoBorrar, name='Eliminar Empleado'),
     path('empleado/ver/<int:pk>', EmpleadoVer, name='Ver Empleado'),
 
     path('variable/', VariableLista, name='Lista Variable'),

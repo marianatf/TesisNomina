@@ -22,7 +22,7 @@ class Variable(models.Model):
 class Formulacion(models.Model):
     codigo_formula = models.AutoField(unique=True, primary_key=True)
     formula = models.CharField(max_length=250)
-    descripcion = models.CharField(max_length=250, default='prueba')
+    descripcion = models.CharField(max_length=250, default='')
 
     def __str__(self):
         return '%s %s ' % (self.codigo_formula, self.descripcion)

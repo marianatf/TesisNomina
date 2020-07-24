@@ -3,7 +3,7 @@
 {% block head_title %} Eliminar {{object.pk}} {% endblock %}
 {% load static %}
 {% block title_page %} Eliminar {{object.cargo |title}}  {% endblock %}
-{% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente el cargo?  {% endblock %}
+{% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente el cargo seleccionado?  {% endblock %}
 
 {% block content %}
 <form method='POST' >{% csrf_token %}
