@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% load widget_tweaks  %}
-{% block head_title %} Crear Pre-nomina {% endblock %}
+{% block head_title %} Modificar Pre-nómina {% endblock %}
 {% load static %}
-{% block title_page %} Nuevo Pre-nomina {% endblock %}
-{% block subtitle_page %} Creación de Concepto Pago {% endblock %}
+{% block title_page %} MODIFICACIÓN DE PRE-NÓMINA {% endblock %}
+{% block subtitle_page %} {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Prenomina'%}">Pre-nómina</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Modificar</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">

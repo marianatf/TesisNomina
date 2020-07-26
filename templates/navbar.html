@@ -1,0 +1,96 @@
+{% load static %}
+
+<nav class="pcoded-navbar">
+                    <div class="pcoded-inner-navbar main-menu" style="background-color: #2a2b3d;">
+                        <ul class="pcoded-item pcoded-left-item" style="margin-top: 15px;">
+                            <li class="">
+                                <a href="{% url 'Dashboard'%}" >
+                                    <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                    <span class="pcoded-mtext">Información General</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <div class="pcoded-navigatio-lavel" style="font-weight: bold; text-transform: uppercase;">Recursos Humanos</div>
+                        <ul class="pcoded-item pcoded-left-item">
+                            <li class="">
+                                <a href="{% url 'Lista Candidato'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-user-plus"></i></span>
+                                    <span class="pcoded-mtext">Candidatos</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{% url 'Lista Escala'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-tasks"></i></span>
+                                    <span class="pcoded-mtext">Escala de Sueldo</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{% url 'Lista Departamento'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-sitemap"></i></span>
+                                    <span class="pcoded-mtext">Departamentos</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{% url 'Lista Cargo'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-list-ol"></i></span>
+                                    <span class="pcoded-mtext">Cargos</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{% url 'Lista Rac'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-columns"></i></span>
+                                    <span class="pcoded-mtext">R.A.C.</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{% url 'Lista Empleado'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-users"></i></span>
+                                    <span class="pcoded-mtext">Empleados</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="pcoded-navigatio-lavel" style="font-weight: bold; text-transform: uppercase;">Concepto Pago</div>
+                        <ul class="pcoded-item pcoded-left-item">
+                            <li class="">
+                                <a href="{% url 'Lista Variable'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-times"></i></span>
+                                    <span class="pcoded-mtext">Variables</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{% url 'Lista Formulacion'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-plus"></i></span>
+                                    <span class="pcoded-mtext">Formulación</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{% url 'Lista ElementoPago'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                    <span class="pcoded-mtext">Elemento de Pago</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{% url 'Lista PagoEmpleado'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-user"></i></span>
+                                    <span class="pcoded-mtext">Pago Empleado</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="pcoded-navigatio-lavel" style="font-weight: bold; text-transform: uppercase;">Proceso Nómina</div>
+<ul class="pcoded-item pcoded-left-item">
+                            <li class="">
+                                <a href="{% url 'Lista Prenomina'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-calendar-check-o"></i></span>
+                                    <span class="pcoded-mtext">Pre-nómina</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{% url 'Lista Nomina'%}" >
+                                    <span class="pcoded-micon"><i class="fa fa-money"></i></span>
+                                    <span class="pcoded-mtext">Nómina</span>
+                                </a>
+                            </li>
+
+                        </ul>                    </div>
+                </nav>

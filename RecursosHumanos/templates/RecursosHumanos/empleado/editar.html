@@ -2,9 +2,15 @@
 {% load widget_tweaks  %}
 {% block head_title %} Modificar Empleado {% endblock %}
 {% load static %}
-{% block title_page %} Modificar Empleado {% endblock %}
+{% block title_page %} MODIFICAR EMPLEADO {% endblock %}
 {% block subtitle_page %} {{object.nombre |title}} {{object.segundo_nombre |title}} {{object.apellido |title}} {{object.segundo_apellido |title}} {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Empleado'%}">Listado de Empleados</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Modificar</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">

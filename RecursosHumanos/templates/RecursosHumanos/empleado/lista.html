@@ -2,15 +2,19 @@
 {% load static %}
 {% block head_title %} Empleados {% endblock %}
 
-{% block title_page %} Empleados {% endblock %}
-{% block subtitle_page %} Totalidad de empledos {% endblock %}
+{% block title_page %} LISTADO DEL PERSONAL {% endblock %}
+{% block subtitle_page %}  {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Empleado'%}">Listado de Empleados</a>
+</li>
+{% endblock %}
 
 {% block content %}
 
 <div class="card">
     <div class="card-header">
-        <h5>Información General</h5>
-        <span>Agregar, actualizar y/o eliminar empleados.</span>
+        <h5>Tabla de Información General</h5>
        <div style="text-align: right;"><a href="{%url 'Crear Empleado'%}"><button class="btn btn-primary btn-round">Agregar Nuevo</button></a></div>
     </div>
 
@@ -19,12 +23,12 @@
             <table id="base-style" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>RAC</th>
+                        <th>#</th>
+                        <th>Cédula</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
                         <th>Sueldo</th>
-                        <th>Estado Laboral</th>
+                        <th>Status</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -32,9 +36,9 @@
                     {% for object in objects %}
                     <tr>
                         <td> <a>{{ object.pk }} </a></td>
-                            <td>{{ object.nombre |title }}</td>
-                            <td>{{ object.apellido |title }}</td>
-                            <td>{{ object.codigo_rac }}</td>
+                            <td>V-{{ object.cedula }}</td>
+                            <td>{{ object.nombre |title }} {{ object.segundo_nombre |title }}</td>
+                            <td>{{ object.apellido |title }} {{ object.segundo_apellido|title }}</td>
                             <td>{{ object.sueldo }}</td>
                             <td>{{ object.get_status_trabajador_display }}</td>
                             <td><a href="{% url 'Ver Empleado' object.pk %}"><i style="font-size: 20px; margin-right: 15px;"class="fa fa-eye"></i></a>
@@ -46,12 +50,12 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>RAC</th>
+                        <th>#</th>
+                        <th>Cédula</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
                         <th>Sueldo</th>
-                        <th>Estado Laboral</th>
+                        <th>Status</th>
                         <th>Acción</th>
                     </tr>
                 </tfoot>

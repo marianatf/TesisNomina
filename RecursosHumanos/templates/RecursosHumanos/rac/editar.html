@@ -2,8 +2,16 @@
 {% load widget_tweaks  %}
 {% block head_title %} Modificar RAC {% endblock %}
 {% load static %}
-{% block title_page %} Modificar Registro y Asignación de Cargo {% endblock %}
+{% block title_page %} MODIFICAR REGISTRO Y ASIGNACIÓN DE CARGO {% endblock %}
 {% block subtitle_page %} {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Rac'%}">Listado de R.A.C.</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Modificar</a>
+</li>
+{% endblock %}
+
 
 {% block content %}
 <div class="card">

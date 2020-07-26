@@ -6,6 +6,8 @@ from django.db.models import Count
 from django.utils.safestring import mark_safe
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from dateutil.relativedelta import relativedelta
+
 
 
 class Empresa(models.Model):
@@ -35,7 +37,7 @@ class Persona(models.Model):
         ('masculino', 'Masculino'),
         ('femenino', 'Femenino'),
         ('otro', 'Otro'),
-        ('ninguno', 'Prefiero No Responder'),
+        ('ninguno', 'Prefiero No Decirlo'),
     )
     status = models.CharField(blank=True, null=True, choices=STATUS, max_length=30, default='desempleado', verbose_name='Estado De La Persona')
     cedula = models.IntegerField(blank=True, null=True, verbose_name='Cedula')
@@ -65,6 +67,9 @@ class Persona(models.Model):
 
     def __str__(self):
             return '%s, %s, %s, %s' % (self.nombre, self.segundo_nombre, self.apellido, self.segundo_apellido)
+
+    def get_age(self):
+        return relativedelta(self.fecha_nacimiento.years(), datetime.date.now()).years
 
     imagen_tag.short_description = 'Imagen'
     imagen_tag.allow_tags = True
@@ -200,14 +205,15 @@ class Empleado(models.Model):
     codigo_empleado = models.AutoField(unique=True, primary_key=True)
     STATUSE = (
         ('trabajando', 'Trabajando'),
-        ('nuevo_ingreso', 'Nuevo Ingreso')
+        ('nuevo_ingreso', 'Nuevo Ingreso'),
+        ('activo', 'Activo')
 
     )
     GENERO = (
         ('masculino', 'Masculino'),
         ('femenino', 'Femenino'),
         ('otro', 'Otro'),
-        ('ninguno', 'Prefiero No Responder'),
+        ('ninguno', 'Prefiero No Decirlo'),
     )
     cedula = models.IntegerField(blank=True, null=True, verbose_name='Cedula')
     codigo_solicitud = models.OneToOneField(Persona, blank=True, null=True, on_delete=models.SET_NULL,verbose_name='Solicitud Empleado')

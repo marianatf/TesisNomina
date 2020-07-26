@@ -2,8 +2,15 @@
 {% load widget_tweaks  %}
 {% block head_title %} Modificar Cargo {% endblock %}
 {% load static %}
-{% block title_page %} Modificar Cargo {% endblock %}
+{% block title_page %} MODIFICAR CARGO {% endblock %}
 {% block subtitle_page %} {{object.cargo |title }} {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Cargo'%}">Listado de Cargos</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Modificar</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">

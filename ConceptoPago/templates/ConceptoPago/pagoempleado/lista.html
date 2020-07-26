@@ -1,17 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block head_title %} Pago de Empleado {% endblock %}
+{% block head_title %} Pago-Empleado {% endblock %}
 
-{% block title_page %} Pago de Empleado  {% endblock %}
-{% block subtitle_page %} Enlace entre pagos y empleados. {% endblock %}
+{% block title_page %} LISTADO DE ENLACE PAGO-EMPLEADO  {% endblock %}
+{% block subtitle_page %} {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista PagoEmpleado'%}">Listado de Enlaces</a>
+</li>
+{% endblock %}
 
 {% block content %}
 
 <div class="card">
     <div class="card-header">
-        <h5>Información General</h5>
-        <span>Agregar, actualizar y/o eliminar pagos.</span>
-           <div style="text-align: right;"><a href="{%url 'Crear PagoEmpleado'%}"><button class="btn btn-primary btn-round">Crear Pago</button></a></div>
+        <h5>Tabla de Información General</h5>
+
+           <div style="text-align: right;"><a href="{%url 'Crear PagoEmpleado'%}"><button class="btn btn-primary btn-round">Crear Enlace</button></a></div>
     </div>
 
     <div class="card-block">
@@ -19,9 +24,9 @@
             <table id="base-style" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Empleado</th>
-                        <th>Elemento Pago</th>
+                        <th>Elemento de Pago</th>
                         <th>Cantidad</th>
                         <th>Monto</th>
                         <th>Acción</th>
@@ -43,9 +48,9 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Empleado</th>
-                        <th>Elemento Pago</th>
+                        <th>Elemento de Pago</th>
                         <th>Cantidad</th>
                         <th>Monto</th>
                         <th>Acción</th>

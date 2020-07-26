@@ -2,9 +2,15 @@
 {% load widget_tweaks  %}
 {% block head_title %} Crear Pre-nómina {% endblock %}
 {% load static %}
-{% block title_page %} Nueva Pre-nómina {% endblock %}
+{% block title_page %} CREACIÓN DE NUEVA PRE-NÓMINA {% endblock %}
 {% block subtitle_page %} Creación de Pre-nómina {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Prenomina'%}">Pre-nómina</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Crear</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">

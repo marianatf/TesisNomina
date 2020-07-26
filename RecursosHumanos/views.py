@@ -11,6 +11,23 @@ from django.template.loader import get_template
 from django.views import View
 from ProcesoNomina.models import *
 from django.db.models import Sum
+from django.forms import modelformset_factory, inlineformset_factory
+
+def myview(request):
+    form = EmpleadoForm(request.POST)
+    if form.is_valid():
+        db = form.save(commit=False)
+        db.email = Persona.objects.get(id__exact=form['codigo_solicitud'].value()).email
+        form = EmpleadoForm(instance=db)
+        content = {'form': form}
+        return render(request, 'RecursosHumanos/empleados/crear.html', content)
+    else:
+        content = {'form': form}
+        return render(request, 'RecursosHumanos/empleados/crear.html', content)
+
+
+
+
 def home(request):
     solicitud = Persona.objects.all().count()
     empleados = Empleado.objects.all().count()
@@ -67,12 +84,10 @@ def PersonaEditar(request, pk):
     obj = get_object_or_404(Persona, pk=pk)
     form = PersonaForm(instance=obj)
     if request.method == 'POST':
-        PersonaForm(request.POST or None, instance=obj)
+        form = PersonaForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista Candidato')
-        else:
-            raise Http404
     template_name = 'RecursosHumanos/persona/editar.html'
     context = {
         "form": form,
@@ -88,6 +103,7 @@ def PersonaVer(request, pk):
     }
     return render(request, template_name , context)
 
+
 def PersonaBorrar(request, pk):
     obj = get_object_or_404(Persona, pk=pk)
     template_name = 'RecursosHumanos/persona/borrar.html'
@@ -97,6 +113,18 @@ def PersonaBorrar(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
+
+def PersonaAgregar(request, pk):
+    obj = get_object_or_404(Persona, pk=pk)
+    template_name = 'RecursosHumanos/persona/familia.html'
+    FamiliaFormset = inlineformset_factory(Persona, Familia, form=FamiliaForm, extra=1)
+    # if request.method == "POST":
+    #     formset = FamiliaFormset(request.POST, queryset=Familia.objects.filter(persona__codigo_solicitud=obj.pk))
+        #return redirect("Lista Candidato")
+    formset = FamiliaFormset(request.POST, queryset=Familia.objects.filter(persona__codigo_solicitud=obj.pk))
+    context = {"object": obj,
+               "formset":formset}
+    return render(request, template_name, context)
 
 def EscalaLista(request):
     obj = Escala.objects.all()

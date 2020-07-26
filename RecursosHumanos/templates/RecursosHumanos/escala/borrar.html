@@ -5,6 +5,13 @@
 {% block title_page %} Eliminar {{object.get_escala_display}}, {{object.grado}} , {{object.paso}}  {% endblock %}
 {% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente la escala de sueldo seleccionada?  {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Escala'%}">Listado de Escalas</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Eliminar</a>
+</li>
+{% endblock %}
+
 {% block content %}
 <form method='POST' >{% csrf_token %}
 

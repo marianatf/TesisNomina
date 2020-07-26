@@ -2,9 +2,15 @@
 {% load widget_tweaks  %}
 {% block head_title %} Modificar Escala {% endblock %}
 {% load static %}
-{% block title_page %} Modificar Escala {% endblock %}
+{% block title_page %} MODIFICAR ESCALA DE SUELDO {% endblock %}
 {% block subtitle_page %} {{object.escala}}, {{object.grado}}, {{object.paso}} {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Escala'%}">Listado de Escalas</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Modificar</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">

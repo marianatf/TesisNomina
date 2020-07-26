@@ -5,6 +5,12 @@
 {% block title_page %} Nuevo Registro y Asignación de Cargos {% endblock %}
 {% block subtitle_page %} Creación de RAC {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Rac'%}">Listado de R.A.C.</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Crear</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">

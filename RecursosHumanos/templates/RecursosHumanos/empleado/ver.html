@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 {% load widget_tweaks  %}
-{% block head_title %} Candidato {{object.pk}} {% endblock %}
+{% block head_title %} Ficha del Empleado {% endblock %}
 {% load static %}
-{% block title_page %} Información Empleado {% endblock %}
+{% block title_page %} FICHA DEL EMPLEADO {% endblock %}
 {% block subtitle_page %}  {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Empleado'%}">Listado de Empleados</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Empleado ({{object.pk}})</a>
+</li>
+{% endblock %}
+
 {% block content %}
+<!--banner-->
 <div class="row">
 <div class="col-lg-12">
     <div class="cover-profile">
@@ -32,10 +40,39 @@
     </div>
 </div>
 </div>
+
+<!--datos de postulacion Tabs-->
 <div class="card">
-    <div class="card-header">
-    </div>
+<!--    <div class="card-header"><h5 style="text-transform: uppercase;"></h5>
+    </div>-->
     <div class="card-block">
+        <div class="view-info">
+            <div class="row">
+                <div class="col-lg-12 col-xl-12">
+                    <!-- Titulo Tabs -->
+                    <ul class="nav nav-tabs md-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#home3" role="tab">Datos Personales</a>
+                            <div class="slide"></div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#profile3" role="tab">Datos de Habitación</a>
+                            <div class="slide"></div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#messages3" role="tab">Datos Bancarios</a>
+                            <div class="slide"></div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#messages4" role="tab">Datos de Estructuras</a>
+                            <div class="slide"></div>
+                        </li>
+                    </ul>
+                    <!-- Tab Info -->
+                    <div class="tab-content card-block">
+                        <!-- Tab Datos Personales -->
+                        <div class="tab-pane active" id="home3" role="tabpanel">
+                        <div class="card-block">
         <div class="view-info">
             <div class="row">
                 <div class="col-lg-12">
@@ -46,28 +83,32 @@
                                     <table class="table m-0">
                                         <tbody>
                                             <tr>
-                                                <th scope="row">Nombre</th>
-                                                <td>{{object.nombre |title}} {{object.segundo_nombre |title}} {{object.apellido |title}} {{object.segundo_apellido |title}}</td>
+                                                <th scope="row">Primer Nombre</th>
+                                                <td>{{object.nombre |title}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Segundo Nombre</th>
+                                                <td>{{object.segundo_nombre |title}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Primer Apellido</th>
+                                                <td>{{object.apellido |title}}d</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Segundo Apellido</th>
+                                                <td>{{object.segundo_apellido |title}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Cédula</th>
+                                                <td>V-{{object.cedula |title}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">RIF</th>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Género</th>
                                                 <td>{{object.get_genero_display}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Fecha de Nacimiento</th>
-                                                <td>{{object.fecha_nacimiento}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Edad</th>
-                                                <td>{{object.edad}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Dirección</th>
-                                                <td>{{object.direccion |title}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">fecha_ingreso</th>
-                                                <td>{{object.direccion |title}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -78,6 +119,92 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
+                                        <tr>
+                                                <th scope="row">Nacionalidad</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Fecha de Nacimiento</th>
+                                                <td>{{object.fecha_nacimiento}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Edad</th>
+                                                <td>{{object.edad}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Estado Civil</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Profesión</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Nro. de Hijos</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Pasaporte</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                        </div>
+                        <!-- end of row -->
+                    </div>
+                    <!-- end of general info -->
+                </div>
+                <!-- end of col-lg-12 -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of view-info -->
+
+        <!-- end of edit-info -->
+    </div>
+                        </div>
+                        <!-- Tab Datos Habitación -->
+                        <div class="tab-pane" id="profile3" role="tabpanel">
+                        <div class="card-block">
+        <div class="view-info">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="general-info">
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <tbody>
+                                        <tr>
+                                                <th scope="row">Dirección</th>
+                                                <td>{{object.direccion |title}}</td>
+                                            </tr>
+                                             <tr>
+                                                <th scope="row">Estado</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Municipio</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- end of table col-lg-6 -->
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                    <table class="table">
+
+                                        <tbody>
+                                        <tr>
+                                                <th scope="row">Parroquia</th>
+                                                <td></td>
+                                            </tr>
                                              <tr>
                                                 <th scope="row">E-mail</th>
                                                 <td>{{object.email}}</td>
@@ -86,13 +213,119 @@
                                                 <th scope="row">Teléfono</th>
                                                 <td>{{object.telefono}}</td>
                                             </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                        </div>
+                        <!-- end of row -->
+                    </div>
+                    <!-- end of general info -->
+                </div>
+                <!-- end of col-lg-12 -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of view-info -->
+
+        <!-- end of edit-info -->
+    </div>
+                        </div>
+                        <!-- Tab Datos Bancarios -->
+                        <div class="tab-pane" id="messages3" role="tabpanel">
+                            <div class="card-block">
+        <div class="view-info">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="general-info">
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <tbody>
+                                        <tr>
+                                                <th scope="row">Forma de Pago</th>
+                                                <td></td>
+                                            </tr>
                                              <tr>
-                                                <th scope="row">Estado Laboral</th>
-                                                <td>{{object.status_trabajador |title}}</td>
+                                                <th scope="row">Tipo de Cuenta</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- end of table col-lg-6 -->
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                    <table class="table">
+
+                                        <tbody>
+
+                                            <tr>
+                                                <th scope="row">Entidad Bancaria</th>
+                                                <td></td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">RAC</th>
-                                                <td>{{object.codigo_rac |title}}</td>
+                                                <th scope="row">Cuenta Bancaria</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                        </div>
+                        <!-- end of row -->
+                    </div>
+                    <!-- end of general info -->
+                </div>
+                <!-- end of col-lg-12 -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of view-info -->
+
+        <!-- end of edit-info -->
+    </div>
+                        </div>
+                        <!-- Tab Datos Estructuras -->
+                        <div class="tab-pane" id="messages4" role="tabpanel">
+                            <div class="card-block">
+        <div class="view-info">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="general-info">
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <tbody>
+                                        <tr>
+                                                <th scope="row">Cargo</th>
+                                                <td>{{object.cargo |title}}</td>
+                                            </tr>
+                                             <tr>
+                                                <th scope="row">Departamento</th>
+                                                <td>{{object.departamento}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- end of table col-lg-6 -->
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                    <table class="table">
+
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Fecha de Ingreso</th>
+                                                <td>{{object.fecha_ingreso}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Sueldo</th>
@@ -116,6 +349,18 @@
 
         <!-- end of edit-info -->
     </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of col-lg-12 -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of view-info -->
+
+        <!-- end of edit-info -->
+    </div>
     <!-- end of card-block -->
 </div>
+
 {% endblock %}

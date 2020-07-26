@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from django.db.models import Count, Sum
 # Register your models here.
 # from .models import (
@@ -24,32 +25,33 @@ from .models import *
 #     ordering = ['nombre', ]
 #
 #
-# class FamiliaInline(admin.StackedInline):
-#     model = Familia
-#     extra = 0
-#     fieldsets = (
-#         (None, {
-#             'fields': ('cedula', ('nombre_1', 'nombre_2'), ('apellido_1', 'apellido_2'), 'fecha_nacimiento')
-#         }),
-#     )
+class FamiliaInline(admin.StackedInline):
+    model = Familia
+    extra = 0
+    # fieldsets = (
+    #     (None, {
+    #         'fields': ('cedula', ('nombre_1', 'nombre_2'), ('apellido_1', 'apellido_2'), 'fecha_nacimiento')
+    #     }),
+    # )
 #
 #
-# class EducacionInline(admin.StackedInline):
-#     model = Educacion
-#     extra = 0
-#     fieldsets = (
-#         (None, {
-#             'fields': (('titulo', 'finalizado'), ('inicio',), ('fin',), 'aptitudes')
-#         }),
-#     )
-#
-#
+class EducacionInline(admin.StackedInline):
+    model = Educacion
+    extra = 0
+    # fieldsets = (
+    #     (None, {
+    #         'fields': (('titulo', 'finalizado'), ('inicio',), ('fin',), 'aptitudes')
+    #     }),
+    # )
+
+
 @admin.register(Empresa)
 class EmpresaAdmin(admin.ModelAdmin):
      pass
 @admin.register(Persona)
 class PersonaAdmin(admin.ModelAdmin):
      list_display = ['codigo_solicitud', 'status', 'imagen_tag']
+     inlines = [EducacionInline, FamiliaInline]
 #     ordering = ['status', 'cod_solicitud', ]
 #     list_filter = ['status', ]
 #     search_fields = ['nombre_1', 'cedula', 'cod_solicitud', 'cargo_opt']

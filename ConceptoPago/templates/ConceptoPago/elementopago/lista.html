@@ -2,15 +2,19 @@
 {% load static %}
 {% block head_title %} Elementos de Pago {% endblock %}
 
-{% block title_page %} Elementos de Pago  {% endblock %}
-{% block subtitle_page %} Crear elementos de pago {% endblock %}
+{% block title_page %} ELEMENTOS DE PAGO {% endblock %}
+{% block subtitle_page %}  {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista ElementoPago'%}">Listado de Elementos</a>
+</li>
+{% endblock %}
 
 {% block content %}
 
 <div class="card">
     <div class="card-header">
-        <h5>Información General</h5>
-        <span>Agregar, actualizar y/o eliminar elementos de pago.</span>
+        <h5>Tabla de Información General</h5>
            <div style="text-align: right;"><a href="{%url 'Crear ElementoPago'%}"><button class="btn btn-primary btn-round">Crear Elemento</button></a></div>
     </div>
 
@@ -19,11 +23,10 @@
             <table id="base-style" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Descripción</th>
-                        <th>Asignación/Deducción</th>
-                        <th>Frecuencia</th>
                         <th>Tipo</th>
+                        <th>Frecuencia</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -34,7 +37,6 @@
                             <td>{{ object.descripcion |title }}</td>
                             <td>{{ object.get_codigo_ad_display }}</td>
                             <td>{{ object.get_frecuencia_display }}</td>
-                            <td>{{ object.get_codigo_fv_display }}</td>
                             <td><a href="{% url 'Editar ElementoPago' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
                                 <a href="{% url 'Eliminar ElementoPago' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>
                             </td>
@@ -43,11 +45,10 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Descripción</th>
-                        <th>Asignación/Deducción</th>
-                        <th>Frecuencia</th>
                         <th>Tipo</th>
+                        <th>Frecuencia</th>
                         <th>Acción</th>
                     </tr>
                 </tfoot>

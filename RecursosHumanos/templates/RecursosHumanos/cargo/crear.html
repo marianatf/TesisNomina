@@ -2,9 +2,15 @@
 {% load widget_tweaks  %}
 {% block head_title %} Crear Cargo {% endblock %}
 {% load static %}
-{% block title_page %} Nuevo Cargo {% endblock %}
-{% block subtitle_page %} Creación de Cargo {% endblock %}
+{% block title_page %} CREACIÓN DE NUEVO CARGO {% endblock %}
+{% block subtitle_page %} {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Cargo'%}">Listado de Cargos</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Crear</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">

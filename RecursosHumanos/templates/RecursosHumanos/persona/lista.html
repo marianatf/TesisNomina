@@ -2,15 +2,17 @@
 {% load static %}
 {% block head_title %} Candidatos {% endblock %}
 
-{% block title_page %} Candidatos {% endblock %}
-{% block subtitle_page %} Totalidad de candidatos {% endblock %}
-
+{% block title_page %} LISTADO DE CANDIDATOS {% endblock %}
+{% block subtitle_page %}  {% endblock %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="#!">Listado de Candidatos</a>
+</li>
+{% endblock %}
 {% block content %}
 
 <div class="card">
     <div class="card-header">
-        <h5>Información General</h5>
-        <span>Agregar, actualizar y/o eliminar candidatos.</span>
+        <h5>Tabla de Información General</h5>
        <div style="text-align: right;"><a href="{%url 'Crear Candidato'%}"><button class="btn btn-primary btn-round">Agregar Nuevo</button></a></div>
     </div>
 
@@ -19,11 +21,12 @@
             <table id="base-style" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
+                        <th>#</th>
+                        <th>Cédula</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
                         <th>Edad</th>
-                        <th>Estado</th>
+                        <th>Status</th>
                         <th>Cargo a Optar</th>
                         <th>Acción</th>
                     </tr>
@@ -32,8 +35,9 @@
                     {% for object in objects %}
                     <tr>
                         <td> <a>{{ object.pk }} </a></td>
-                            <td>{{ object.nombre |title }}</td>
-                            <td>{{ object.apellido |title }}</td>
+                            <td>V-{{ object.cedula }}</td>
+                            <td>{{ object.nombre |title }} {{ object.segundo_nombre |title }}</td>
+                            <td>{{ object.apellido |title }} {{ object.segundo_apellido|title }}</td>
                             <td>{{ object.edad }}</td>
                             <td>{{ object.get_status_display }}</td>
                             <td>{{ object.cargo_optar |title }}</td>
@@ -46,11 +50,12 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
+                        <th>#</th>
+                        <th>Cédula</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
                         <th>Edad</th>
-                        <th>Estado</th>
+                        <th>Status</th>
                         <th>Cargo a Optar</th>
                         <th>Acción</th>
                     </tr>

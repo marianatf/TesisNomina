@@ -2,14 +2,21 @@
 {% load widget_tweaks  %}
 {% block head_title %} Pre-nómina {{object.pk}} {% endblock %}
 {% load static %}
-{% block title_page %} Información Pre-nómina {% endblock %}
+{% block title_page %} INFORMACIÓN DE PRE-NÓMINA {% endblock %}
 {% block subtitle_page %} {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Prenomina'%}">Pre-nómina</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Visualización</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">
     <div class="card-header">
-            <span>Fecha: {{object.fecha_final}} <br> Monto Total = {{total_emp}} <br> Descripción: {{object.descripcion}}</span>
-        <div style="text-align: right;"><a href="{%url 'Pdf Todos' object.pk %}"><button class="btn btn-primary btn-round">Exportar PDF</button></a></div>
+            <span>Descripción: {{object.descripcion}} <br>Fecha: {{object.fecha_final}} <br> Monto Total = {{total_emp}}</span>
+        <div style="text-align: right;"><a href="{%url 'Pdf Todos' object.pk %}"><button class="btn btn-primary btn-round" >Exportar PDF</button></a></div>
     </div>
     <div class="card-block">
         <div class="view-info">
@@ -22,7 +29,7 @@
                 <thead>
                     <tr>
                         <th>Empleado</th>
-                        <th>Descripcion</th>
+                        <th>Descripción</th>
                         <th>Monto</th>
                         <th>Tipo</th>
                     </tr>
@@ -40,7 +47,7 @@
                 <tfoot>
                     <tr>
                         <th>Empleado</th>
-                        <th>Descripcion</th>
+                        <th>Descripción</th>
                         <th>Monto</th>
                         <th>Tipo</th>
                     </tr>

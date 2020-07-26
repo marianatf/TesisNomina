@@ -2,15 +2,19 @@
 {% load static %}
 {% block head_title %} RAC {% endblock %}
 
-{% block title_page %} Registro y Asignación de Cargo {% endblock %}
-{% block subtitle_page %} Totalidad de Registro y Asignación de Cargos {% endblock %}
+{% block title_page %} LISTADO DE REGISTRO Y ASIGNACIÓN DE CARGO {% endblock %}
+{% block subtitle_page %} {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Rac'%}">Listado de R.A.C.</a>
+</li>
+{% endblock %}
 
 {% block content %}
 
 <div class="card">
     <div class="card-header">
-        <h5>Información General</h5>
-        <span>Agregar, actualizar y/o eliminar R.A.C.</span>
+        <h5>Tabla de Información General</h5>
            <div style="text-align: right;"><a href="{%url 'Crear Rac'%}"><button class="btn btn-primary btn-round">Crear R.A.C</button></a></div>
     </div>
 
@@ -19,7 +23,7 @@
             <table id="base-style" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Departamento</th>
                         <th>Cargo</th>
                         <th>Escala</th>
@@ -43,7 +47,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Departamento</th>
                         <th>Cargo</th>
                         <th>Escala</th>

@@ -2,16 +2,20 @@
 {% load static %}
 {% block head_title %} Nómina {% endblock %}
 
-{% block title_page %} Nómina de empleados  {% endblock %}
-{% block subtitle_page %} Nómina de empleados final {% endblock %}
+{% block title_page %} NÓMINA GENERAL DE EMPLEADOS  {% endblock %}
+{% block subtitle_page %}  {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Nomina'%}">Nómina</a>
+</li>
+{% endblock %}
 
 {% block content %}
 
 <div class="card">
     <div class="card-header">
-        <h5>Información General</h5>
-        <span>Agregar y visualizar las nóminas de empleados.</span>
-           <div style="text-align: right;"><a href="{%url 'Crear Nomina'%}"><button class="btn btn-primary btn-round">Agregar Nómina</button></a></div>
+        <h5>Tabla de Información General</h5>
+           <div style="text-align: right;"><a href="{%url 'Crear Nomina'%}"><button class="btn btn-primary btn-round">Agregar Pre-nómina</button></a></div>
     </div>
 
     <div class="card-block">
@@ -19,7 +23,7 @@
             <table id="base-style" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Pre-nómina</th>
                         <th>Procesado</th>
                         <th>Acción</th>
@@ -38,7 +42,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Pre-nómina</th>
                         <th>Procesado</th>
                         <th>Acción</th>

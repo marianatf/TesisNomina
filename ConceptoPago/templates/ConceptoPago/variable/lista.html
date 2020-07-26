@@ -2,15 +2,19 @@
 {% load static %}
 {% block head_title %} Variable {% endblock %}
 
-{% block title_page %} Variables  {% endblock %}
-{% block subtitle_page %} Totalidad de Variables {% endblock %}
+{% block title_page %} LISTADO DE CONCEPTOS VARIABLES  {% endblock %}
+{% block subtitle_page %} {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Variable'%}">Listado de Variables</a>
+</li>
+{% endblock %}
 
 {% block content %}
 
 <div class="card">
     <div class="card-header">
-        <h5>Información General</h5>
-        <span>Agregar, actualizar y/o eliminar variables.</span>
+        <h5>Tabla de Información General</h5>
            <div style="text-align: right;"><a href="{%url 'Crear Variable'%}"><button class="btn btn-primary btn-round">Crear Variable</button></a></div>
     </div>
 
@@ -19,7 +23,7 @@
             <table id="base-style" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Descripcion</th>
                         <th>Monto</th>
                         <th>Acción</th>
@@ -39,7 +43,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Descripcion</th>
                         <th>Monto</th>
                         <th>Acción</th>

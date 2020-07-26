@@ -2,9 +2,15 @@
 {% load widget_tweaks  %}
 {% block head_title %} Crear Candidato {% endblock %}
 {% load static %}
-{% block title_page %} Nuevo Candidato {% endblock %}
+{% block title_page %} CREACIÓN DE NUEVO CANDIDATO {% endblock %}
 {% block subtitle_page %} Planilla de Postulación {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Candidato'%}">Listado de Candidatos</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Crear Candidato</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">
@@ -44,7 +50,7 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
         <div class="col-sm-10">
-        {% render_field form.segundo_nombre class="form-control" type="date" %}
+        {% render_field form.fecha_nacimiento class="form-control" type="date" %}
         </div>
     </div>
     <div class="form-group row">

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 # from .models import BlogPost
 from .models import *
-
+from django.contrib.admin.widgets import AdminDateWidget
 
 class EmpresaForm(forms.ModelForm):
     class Meta:
@@ -16,6 +16,13 @@ class PersonaForm(forms.ModelForm):
     class Meta:
         model = Persona
         fields = ['codigo_solicitud', 'status', 'cedula', 'apellido', 'nombre', 'segundo_nombre', 'segundo_apellido', 'fecha_nacimiento', 'edad', 'ocupacion_actual', 'cargo_optar', 'email', 'telefono', 'genero', 'imagen', 'direccion']
+
+
+class FamiliaForm(forms.ModelForm):
+    class Meta:
+        model = Familia
+        fields = ['nombre','apellido']
+
 
 class EscalaForm(forms.ModelForm):
     class Meta:
@@ -41,6 +48,10 @@ class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
         fields = ['cedula', 'codigo_solicitud', 'apellido', 'nombre', 'segundo_apellido', 'segundo_nombre', 'codigo_solicitud', 'codigo_rac', 'sueldo', 'fecha_nacimiento', 'edad', 'email', 'telefono', 'genero', 'imagen', 'status_trabajador', 'direccion','fecha_ingreso']
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['codigo_solicitud'].widget.attrs['onchange'] = "load_email()"
 
 
 # class BlogPostForm(forms.Form):

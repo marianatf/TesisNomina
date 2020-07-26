@@ -28,6 +28,7 @@ urlpatterns = [
     path('candidato/editar/<int:pk>', PersonaEditar, name='Editar Candidato'),
     path('candidato/ver/<int:pk>', PersonaVer, name='Ver Candidato'),
     path('candidato/eliminar/<int:pk>', PersonaBorrar, name='Eliminar Candidato'),
+    path('candidato/familia/<int:pk>', PersonaAgregar, name='Agregar FamEdu'),
 
     path('escala/', EscalaLista, name='Lista Escala'),
     path('escala/crear', EscalaCrear, name='Crear Escala'),

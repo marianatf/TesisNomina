@@ -2,9 +2,15 @@
 {% load widget_tweaks  %}
 {% block head_title %} Crear Concepto Pago {% endblock %}
 {% load static %}
-{% block title_page %} Nuevo Concepto Pago {% endblock %}
-{% block subtitle_page %} Creación de Concepto Pago {% endblock %}
+{% block title_page %} MODIFICAR ENLACE PAGO-EMPLEADO {% endblock %}
+{% block subtitle_page %} {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista PagoEmpleado'%}">Listado de Enlaces</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Modificar</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">

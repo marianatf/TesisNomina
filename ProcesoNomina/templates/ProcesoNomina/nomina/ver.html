@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 {% load widget_tweaks  %}
-{% block head_title %} Candidato {{object.pk}} {% endblock %}
+{% block head_title %} Nómina {% endblock %}
 {% load static %}
 {% block title_page %} Información Prenomina {% endblock %}
 {% block subtitle_page %} {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Variable'%}">Nómina</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Exportar</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">

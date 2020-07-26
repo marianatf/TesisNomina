@@ -5,6 +5,13 @@
 {% block title_page %} Eliminar {{object.descripcion |title}}  {% endblock %}
 {% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente el documento de pre-nómina?  {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Prenomina'%}">Pre-nómina</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Eliminar</a>
+</li>
+{% endblock %}
+
 {% block content %}
 <form method='POST' >{% csrf_token %}
 

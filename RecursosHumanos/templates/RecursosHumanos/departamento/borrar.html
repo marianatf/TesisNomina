@@ -5,6 +5,13 @@
 {% block title_page %} Eliminar {{object.descripcion}}  {% endblock %}
 {% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente el departamento seleccionado?  {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Departamento'%}">Listado de Departamentos</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Eliminar</a>
+</li>
+{% endblock %}
+
 {% block content %}
 <form method='POST' >{% csrf_token %}
 

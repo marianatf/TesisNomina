@@ -2,15 +2,20 @@
 {% load static %}
 {% block head_title %} Formulación {% endblock %}
 
-{% block title_page %} Formulación  {% endblock %}
-{% block subtitle_page %} Generar conceptos de pago {% endblock %}
+{% block title_page %} LISTADO DE FÓRMULAS / CONCEPTOS DE PAGO {% endblock %}
+{% block subtitle_page %}  {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Formulacion'%}">Listado de Fórmulas</a>
+</li>
+{% endblock %}
 
 {% block content %}
 
 <div class="card">
     <div class="card-header">
-        <h5>Información General</h5>
-        <span>Agregar, actualizar y/o eliminar fórmulas.</span>
+        <h5>Tabla de Información General</h5>
+
            <div style="text-align: right;"><a href="{%url 'Crear Formulacion'%}"><button class="btn btn-primary btn-round">Crear Fórmula</button></a></div>
     </div>
 
@@ -19,7 +24,7 @@
             <table id="base-style" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Descripcion</th>
                         <th>Fórmula</th>
                         <th>Acción</th>
@@ -39,7 +44,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Código</th>
+                        <th>#</th>
                         <th>Descripcion</th>
                         <th>Fórmula</th>
                         <th>Acción</th>

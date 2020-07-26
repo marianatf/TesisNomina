@@ -3,7 +3,14 @@
 {% block head_title %} Eliminar {{object.pk}} {% endblock %}
 {% load static %}
 {% block title_page %} Eliminar {{object.descripcion |title}}  {% endblock %}
-{% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente el concepto de pago seleccionado?  {% endblock %}
+{% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente el enlace seleccionado?  {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista PagoEmpleado'%}">Listado de Enlaces</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Eliminar</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <form method='POST' >{% csrf_token %}

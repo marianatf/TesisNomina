@@ -3,9 +3,15 @@
 
 {% block head_title %} Crear Empleado {% endblock %}
 {% load static %}
-{% block title_page %} Nuevo Empleado {% endblock %}
-{% block subtitle_page %} Planilla de Información Personal {% endblock %}
+{% block title_page %} CREACIÓN DE NUEVO EMPLEADO {% endblock %}
+{% block subtitle_page %}  {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Empleado'%}">Listado de Empleados</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Crear</a>
+</li>
+{% endblock %}
 
 {% block content %}
 
@@ -129,5 +135,11 @@
 </div>
 </div>
 
-
+<script>
+function load_email()
+{
+document.getElementById('id_codigo_solicitud').action = "/stack/myview";
+document.getElementById("id_codigo_solicitud").submit();
+}
+</script>
 {% endblock %}

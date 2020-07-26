@@ -5,6 +5,13 @@
 {% block title_page %} Eliminar Candidato: {{object.nombre |title}} {{object.segundo_nombre |title}} {{object.apellido |title}} {{object.segundo_apellido |title}}  {% endblock %}
 {% block subtitle_page %} ¿Está seguro que desea eliminar permanentemente el candidato seleccionado?  {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Candidato'%}">Listado de Candidatos</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Eliminar</a>
+</li>
+{% endblock %}
+
 {% block content %}
 <form method='POST' >{% csrf_token %}
 

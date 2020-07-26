@@ -2,9 +2,15 @@
 {% load widget_tweaks  %}
 {% block head_title %} Crear Variable {% endblock %}
 {% load static %}
-{% block title_page %} Nueva Variable {% endblock %}
-{% block subtitle_page %} Creación de variables para formulación {% endblock %}
+{% block title_page %} CREACIÓN DE NUEVA VARIABLE PARA FORMULACIÓN {% endblock %}
+{% block subtitle_page %}  {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Variable'%}">Listado de Variables</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Crear</a>
+</li>
+{% endblock %}
 
 {% block content %}
 <div class="card">
