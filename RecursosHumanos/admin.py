@@ -52,6 +52,14 @@ class EmpresaAdmin(admin.ModelAdmin):
 class PersonaAdmin(admin.ModelAdmin):
      list_display = ['codigo_solicitud', 'status', 'imagen_tag']
      inlines = [EducacionInline, FamiliaInline]
+
+@admin.register(Empleado)
+class EmpleadoAdmin(admin.ModelAdmin):
+     list_display = ['codigo_empleado']
+
+@admin.register(Rac)
+class RacAdmin(admin.ModelAdmin):
+     list_display = ['codigo_rac']
 #     ordering = ['status', 'cod_solicitud', ]
 #     list_filter = ['status', ]
 #     search_fields = ['nombre_1', 'cedula', 'cod_solicitud', 'cargo_opt']

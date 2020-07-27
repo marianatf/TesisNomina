@@ -2,7 +2,7 @@ from django.db import models
 from RecursosHumanos.models import *
 from datetime import datetime
 from django.contrib.auth.models import User
-
+from dateutil.relativedelta import *
 
 # Create your models here.
 class Variable(models.Model):
@@ -36,9 +36,9 @@ class Formulacion(models.Model):
 
 class ElementoPago(models.Model):
     AD = (
-        ('asignacion', 'Asignacion'),
-        ('deduccion', 'Deduccion'),
-        ('prestamo', 'Prestamo'),
+        ('asignacion', 'Asignación'),
+        ('deduccion', 'Deducción'),
+        ('prestamo', 'Préstamo'),
     )
     FV = (
         ('fijo', 'Fijo'),
@@ -48,7 +48,7 @@ class ElementoPago(models.Model):
     FC = (
 
         ('td', 'Todas las Quincenas'),
-        ('fm', 'Final de Mes'),
+        ('fm', 'Fin de Mes'),
     )
 
     codigo_elemento_pago = models.AutoField(unique=True, primary_key=True)
@@ -67,7 +67,7 @@ class ElementoPago(models.Model):
         super(ElementoPago, self).save(*args, **kwargs)
 
     def __str__(self):
-        return '%s : %s ' % (self.descripcion, self.codigo_ad)
+        return '%s : %s ' % (self.descripcion, self.get_codigo_ad_display())
 
     class Meta:
         verbose_name = "Elemento de Pago"
@@ -78,7 +78,7 @@ class ElementoPago(models.Model):
 class PagoEmpleado(models.Model):
     codigo_pago = models.AutoField(unique=True, primary_key=True)
     codigo_empleado = models.ForeignKey(Empleado, on_delete=models.SET_NULL, blank=True, null=True)
-    elemento_pago = models.ForeignKey(ElementoPago, on_delete=models.SET_NULL, blank=True, null=True)
+    elemento_pago = models.ForeignKey(ElementoPago, on_delete=models.CASCADE, blank=True, null=True)
     cantidad = models.IntegerField(blank=True, null=True, default='1')
     monto = models.DecimalField(decimal_places=2, max_digits=20, default='0', blank=True, null=True)
     formula = models.CharField(max_length=250, blank=True, null=True, verbose_name='Formula')
@@ -87,20 +87,20 @@ class PagoEmpleado(models.Model):
         if self.elemento_pago:
             if self.elemento_pago.codigo_formula:
                 self.formula = self.elemento_pago.codigo_formula.formula
-                self.formula = self.formula.replace("(sueldo)", "(self.codigo_empleado.sueldo)")
+                self.formula = self.formula.replace("(sueldo)", "(self.codigo_empleado.codigo_rac.codigo_escala.sueldo)")
                 self.formula = self.formula.replace("(años-servicio)",
-                                                    "(relativedelta.relativedelta(datetime.now(),self.codigo_empleado.fecha_creacion)).years")
+                                                    "(relativedelta.relativedelta(datetime.now(),self.codigo_empleado.fecha_ingreso)).years")
                 self.monto = eval(self.formula)
-                self.formula = self.formula.replace("(self.codigo_empleado.sueldo)", "(sueldo)")
+                self.formula = self.formula.replace("(self.codigo_empleado.codigo_rac.codigo_escala.sueldo)", "(sueldo)")
                 self.formula = self.formula.replace(
-                    "(relativedelta.relativedelta(datetime.now(),self.codigo_empleado.fecha_creacion)).years",
+                    "(relativedelta.relativedelta(datetime.now(),self.self.codigo_empleado.fecha_ingreso)).years",
                     "(años-servicio)")
-            else:
-                self.monto = self.elemento_pago.codigo_formula.formula
-            if self.elemento_pago.codigo_ad == 'deduccion':
-                self.monto = self.monto * -1
-            if self.cantidad > 0:
-                self.monto = self.monto * self.cantidad
+            # else:
+            #     self.monto = self.elemento_pago.codigo_formula.formula
+            # if self.elemento_pago.codigo_ad == 'deduccion':
+            #     self.monto = self.monto * -1
+            # if self.cantidad > 0:
+            #     self.monto = self.monto * self.cantidad
         # if self.elemento_pago.codigo_ad == 'prestamo':
 
         super(PagoEmpleado, self).save(*args, **kwargs)
@@ -122,6 +122,6 @@ class PagoEmpleado(models.Model):
             descripcion = None
 
         return 'Empleado: %s, %s , %s, %s ->  %s' % (
-        self.codigo_empleado.pk, codigo_ad, codigo_fv, descripcion, self.monto)
+        self.codigo_empleado, codigo_ad, codigo_fv, descripcion, self.monto)
 
 

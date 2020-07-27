@@ -41,9 +41,9 @@
                             <td>{{ object.fecha_final }}</td>
                             <td>{{ object.pagos_empleados.count }}</td>
                             <td>{{ object.sumatoria }}</td>
-                            <td><a href="{% url 'Ver Prenomina' object.pk %}"><i style="font-size: 20px; margin-right: 15px;"class="fa fa-eye"></i></a>
-                                <a href="{% url 'Editar Prenomina' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
-                                <a href="{% url 'Eliminar Prenomina' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>
+                            <td><a href="{% url 'Ver Prenomina' object.pk %}"><i style="font-size: 20px; margin-right: 15px;"class="feather icon-eye"></i></a>
+                                <a href="{% url 'Editar Prenomina' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="feather icon-edit"></i></a>
+                                <a href="{% url 'Eliminar Prenomina' object.pk %}"><i style="font-size: 20px;" class="feather icon-trash-2"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

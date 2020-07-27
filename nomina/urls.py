@@ -91,6 +91,7 @@ urlpatterns = [
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 admin.site.site_header = "Nomina"
 admin.site.site_title = "Nomina y Personal"
 admin.site.index_title = "Bienvenido al Sistema de Nomina y Pagos"

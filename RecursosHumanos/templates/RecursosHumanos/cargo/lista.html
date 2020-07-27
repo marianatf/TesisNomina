@@ -35,8 +35,8 @@
                             <td>{{ object.pk }}</td>
                             <td>{{ object.cargo |title }}</td>
                             <td>{{ object.descripcion |title }}</td>
-                            <td><a href="{% url 'Editar Cargo' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
-                                <a href="{% url 'Eliminar Cargo' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>
+                            <td><a href="{% url 'Editar Cargo' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="feather icon-edit"></i></a>
+                                <a href="{% url 'Eliminar Cargo' object.pk %}"><i style="font-size: 20px;" class="feather icon-trash-2"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

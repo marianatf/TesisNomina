@@ -24,14 +24,15 @@
             {% csrf_token %}
 
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Nombre Departamento *</label>
+        <label class="col-sm-2 col-form-label">Nombre del Departamento *</label>
         <div class="col-sm-10">
         {% render_field form.descripcion class="form-control" type="text" %}
         </div>
     </div>
 
+
     <div class="form-group">
-            <input class="btn btn-success btn-round btn-block" type="submit" value="Guardar"></input>
+            <input class="btn btn-success btn-round" type="submit" value="Guardar"></input>
     </div>
 </form>
 </div>

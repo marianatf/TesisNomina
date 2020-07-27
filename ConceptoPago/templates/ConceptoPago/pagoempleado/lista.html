@@ -37,11 +37,11 @@
                     <tr>
                             <td>{{ object.pk }}</td>
                             <td>{{ object.codigo_empleado |title }}</td>
-                            <td>{{ object.elemento_pago }}</td>
+                            <td>{{ object.elemento_pago |title }}</td>
                             <td>{{ object.cantidad }}</td>
                             <td>{{ object.monto }}</td>
-                            <td><a href="{% url 'Editar PagoEmpleado' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
-                                <a href="{% url 'Eliminar PagoEmpleado' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>
+                            <td><a href="{% url 'Editar PagoEmpleado' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="feather icon-edit"></i></a>
+                                <a href="{% url 'Eliminar PagoEmpleado' object.pk %}"><i style="font-size: 20px;" class="feather icon-trash-2"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

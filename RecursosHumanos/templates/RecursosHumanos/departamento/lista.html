@@ -24,8 +24,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Descripción</th>
-                        <th>Cantidad Empleados</th>
+                        <th>Departamento</th>
+                        <th>Cargos</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -34,9 +34,9 @@
                     <tr>
                             <td>{{ object.pk }}</td>
                             <td>{{ object.descripcion |title }}</td>
-                            <td>{{ object.cantidad_empleado  }}</td>
-                            <td><a href="{% url 'Editar Departamento' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
-                                <a href="{% url 'Eliminar Departamento' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>
+                            <td>{{ object.rac_set.count  }}</td>
+                            <td><a href="{% url 'Editar Departamento' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="feather icon-edit"></i></a>
+                                <a href="{% url 'Eliminar Departamento' object.pk %}"><i style="font-size: 20px;" class="feather icon-trash-2"></i></a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -44,8 +44,8 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>Descripción</th>
-                        <th>Cantidad Empleados</th>
+                        <th>Departamento</th>
+                        <th>Cargos</th>
                         <th>Acción</th>
                     </tr>
                 </tfoot>

@@ -62,7 +62,7 @@ def PersonaLista(request):
 def PersonaCrear(request):
     form = PersonaForm()
     if request.method == 'POST':
-        form = PersonaForm(request.POST)
+        form = PersonaForm(request.POST,request.FILES or None)
         if form.is_valid():
             obj = form.save()
             obj.user = request.user
@@ -84,7 +84,7 @@ def PersonaEditar(request, pk):
     obj = get_object_or_404(Persona, pk=pk)
     form = PersonaForm(instance=obj)
     if request.method == 'POST':
-        form = PersonaForm(request.POST, instance=obj)
+        form = PersonaForm(request.POST, request.FILES or None, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista Candidato')
@@ -155,16 +155,14 @@ def EscalaEditar(request, pk):
     obj = get_object_or_404(Escala, pk=pk)
     form = EscalaForm(instance=obj)
     if request.method == 'POST':
-        EscalaForm(request.POST or None, instance=obj)
+        form = EscalaForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista Escala')
-        else:
-            raise Http404
     template_name = 'RecursosHumanos/escala/editar.html'
     context = {
         "form": form,
-        "object": obj
+        "object":obj
     }
     return render(request, template_name, context)
 
@@ -201,21 +199,18 @@ def DepartamentoCrear(request):
     }
     return render(request, template_name , context)
 
-
 def DepartamentoEditar(request, pk):
     obj = get_object_or_404(Departamento, pk=pk)
     form = DepartamentoForm(instance=obj)
     if request.method == 'POST':
-        DepartamentoForm(request.POST or None, instance=obj)
+        form = DepartamentoForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista Departamento')
-        else:
-            raise Http404
     template_name = 'RecursosHumanos/departamento/editar.html'
     context = {
         "form": form,
-        "object": obj
+        "object":obj
     }
     return render(request, template_name, context)
 
@@ -252,23 +247,21 @@ def CargoCrear(request):
     }
     return render(request, template_name , context)
 
-
 def CargoEditar(request, pk):
     obj = get_object_or_404(Cargo, pk=pk)
     form = CargoForm(instance=obj)
     if request.method == 'POST':
-        CargoForm(request.POST or None, instance=obj)
+        form = CargoForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista Cargo')
-        else:
-            raise Http404
     template_name = 'RecursosHumanos/cargo/editar.html'
     context = {
         "form": form,
-        "object": obj
+        "object":obj
     }
     return render(request, template_name, context)
+
 
 def CargoBorrar(request, pk):
     obj = get_object_or_404(Cargo, pk=pk)
@@ -302,23 +295,21 @@ def RacCrear(request):
     }
     return render(request, template_name , context)
 
-
 def RacEditar(request, pk):
     obj = get_object_or_404(Rac, pk=pk)
     form = RacForm(instance=obj)
     if request.method == 'POST':
-        RacForm(request.POST or None, instance=obj)
+        form = RacForm(request.POST, request.FILES or None, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista Rac')
-        else:
-            raise Http404
     template_name = 'RecursosHumanos/rac/editar.html'
     context = {
         "form": form,
-        "object": obj
+        "object":obj
     }
     return render(request, template_name, context)
+
 
 def RacBorrar(request, pk):
     obj = get_object_or_404(Rac, pk=pk)
@@ -341,7 +332,7 @@ def EmpleadoLista(request):
 def EmpleadoCrear(request):
     form = EmpleadoForm()
     if request.method == 'POST':
-        form = EmpleadoForm(request.POST or None)
+        form = EmpleadoForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             obj = form.save()
             obj.user = request.user
@@ -358,16 +349,14 @@ def EmpleadoEditar(request, pk):
     obj = get_object_or_404(Empleado, pk=pk)
     form = EmpleadoForm(instance=obj)
     if request.method == 'POST':
-        EmpleadoForm(request.POST or None, instance=obj)
+        form = EmpleadoForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista Empleado')
-        else:
-            raise Http404
     template_name = 'RecursosHumanos/empleado/editar.html'
     context = {
         "form": form,
-        "object": obj
+        "object":obj
     }
     return render(request, template_name, context)
 

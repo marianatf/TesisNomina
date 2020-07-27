@@ -13,9 +13,10 @@ class IngresoEmpresaForm(forms.Form):
     empresa = forms.ModelChoiceField(queryset=Empresa.objects.all(), empty_label="Empresas")
 
 class PersonaForm(forms.ModelForm):
+    cargo_optar = forms.ModelChoiceField(queryset=Cargo.objects.all())
     class Meta:
         model = Persona
-        fields = ['codigo_solicitud', 'status', 'cedula', 'apellido', 'nombre', 'segundo_nombre', 'segundo_apellido', 'fecha_nacimiento', 'edad', 'ocupacion_actual', 'cargo_optar', 'email', 'telefono', 'genero', 'imagen', 'direccion']
+        fields = ['codigo_solicitud', 'status', 'cedula', 'apellido', 'nombre', 'segundo_nombre', 'segundo_apellido', 'fecha_nacimiento', 'ocupacion_actual', 'cargo_optar', 'email', 'telefono', 'genero', 'imagen', 'direccion','rif','nacionalidad','municipio','parroquia','estado','profesion']
 
 
 class FamiliaForm(forms.ModelForm):
@@ -42,12 +43,13 @@ class CargoForm(forms.ModelForm):
 class RacForm(forms.ModelForm):
     class Meta:
         model = Rac
-        fields = ['codigo_departamento', 'codigo_cargo', 'codigo_escala', 'compensacion', 'cargo_ocupado']
+        fields = ['codigo_departamento', 'codigo_cargo', 'codigo_escala']
 
 class EmpleadoForm(forms.ModelForm):
+    codigo_rac = forms.ModelChoiceField(queryset=Rac.objects.all().filter(cargo_ocupado=False))
     class Meta:
         model = Empleado
-        fields = ['cedula', 'codigo_solicitud', 'apellido', 'nombre', 'segundo_apellido', 'segundo_nombre', 'codigo_solicitud', 'codigo_rac', 'sueldo', 'fecha_nacimiento', 'edad', 'email', 'telefono', 'genero', 'imagen', 'status_trabajador', 'direccion','fecha_ingreso']
+        fields = ['cedula', 'codigo_solicitud', 'apellido', 'nombre', 'segundo_apellido', 'segundo_nombre', 'codigo_solicitud', 'codigo_rac', 'sueldo', 'fecha_nacimiento', 'email', 'telefono', 'genero', 'imagen', 'status_trabajador', 'direccion','fecha_ingreso', 'profesion', 'estado', 'municipio', 'parroquia', 'nacionalidad', 'rif', 'estado_civil', 'forma_pago', 'tipo_cuenta', 'banco', 'cuenta']
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)

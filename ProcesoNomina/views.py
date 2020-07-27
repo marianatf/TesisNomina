@@ -10,6 +10,29 @@ from django.utils import timezone
 from .models import *
 from .render import Render
 from django.db.models import Sum
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
+
+def LoginPage(request):
+    if request.method =='POST':
+        usernames = request.POST['username']
+        passwords = request.POST['password']
+        user = authenticate(request, username=usernames, password=passwords)
+        if user is not None:
+            login(request, user)
+            # Redirect to a success page.
+            return redirect('Dashboard')
+        else:
+            messages.info(request, 'Usuario o Clave Erroneo')
+    context = {}
+    return render(request, 'RecursosHumanos/login.html',context)
+
+def LogoutUser(request):
+    logout(request)
+    return redirect('login')
+
+
 
 class Pdf(View):
 
@@ -62,7 +85,6 @@ def PrenominaCrear(request):
             obj = form.save()
             obj.user = request.user
             obj.save()
-            form = PrenominaForm()
             return redirect("Lista Prenomina")
     template_name = 'ProcesoNomina/prenomina/crear.html'
     context = {
@@ -70,23 +92,22 @@ def PrenominaCrear(request):
     }
     return render(request, template_name , context)
 
+
 def PrenominaEditar(request, pk):
     obj = get_object_or_404(Prenomina, pk=pk)
     form = PrenominaForm(instance=obj)
     if request.method == 'POST':
-        PrenominaForm(request.POST or None, instance=obj)
+        form = PrenominaForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista Prenomina')
-        else:
-            raise Http404
     template_name = 'ProcesoNomina/prenomina/editar.html'
     context = {
         "form": form,
-        "object": obj,
-
+        "object":obj
     }
     return render(request, template_name, context)
+
 
 
 def PrenominaBorrar(request, pk):

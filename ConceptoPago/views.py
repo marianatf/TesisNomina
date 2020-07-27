@@ -32,16 +32,14 @@ def VariableEditar(request, pk):
     obj = get_object_or_404(Variable, pk=pk)
     form = VariableForm(instance=obj)
     if request.method == 'POST':
-        VariableForm(request.POST or None, instance=obj)
+        form = VariableForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista Variable')
-        else:
-            raise Http404
     template_name = 'ConceptoPago/variable/editar.html'
     context = {
         "form": form,
-        "object": obj
+        "object":obj
     }
     return render(request, template_name, context)
 
@@ -88,20 +86,18 @@ def FormulacionEditar(request, pk):
     obj2 = Variable.objects.all()
     form = FormulacionForm(instance=obj)
     if request.method == 'POST':
-        FormulacionForm(request.POST or None, instance=obj)
+        form = FormulacionForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista Formulacion')
-        else:
-            raise Http404
     template_name = 'ConceptoPago/formulacion/editar.html'
     context = {
         "form": form,
-        "object": obj,
+        "object":obj,
         "object_list_2": obj2
-
     }
     return render(request, template_name, context)
+
 
 
 def FormulacionBorrar(request, pk):
@@ -142,23 +138,19 @@ def ElementoPagoCrear(request):
 
 def ElementoPagoEditar(request, pk):
     obj = get_object_or_404(ElementoPago, pk=pk)
-    obj2 = Variable.objects.all()
     form = ElementoPagoForm(instance=obj)
     if request.method == 'POST':
-        ElementoPagoForm(request.POST or None, instance=obj)
+        form = ElementoPagoForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista ElementoPago')
-        else:
-            raise Http404
     template_name = 'ConceptoPago/elementopago/editar.html'
     context = {
         "form": form,
-        "object": obj,
-        "object_list_2": obj2
-
+        "object":obj
     }
     return render(request, template_name, context)
+
 
 
 def ElementoPagoBorrar(request, pk):
@@ -195,21 +187,19 @@ def PagoEmpleadoCrear(request):
     }
     return render(request, template_name , context)
 
+
 def PagoEmpleadoEditar(request, pk):
     obj = get_object_or_404(PagoEmpleado, pk=pk)
     form = PagoEmpleadoForm(instance=obj)
     if request.method == 'POST':
-        PagoEmpleadoForm(request.POST or None, instance=obj)
+        form = PagoEmpleadoForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('Lista PagoEmpleado')
-        else:
-            raise Http404
     template_name = 'ConceptoPago/pagoempleado/editar.html'
     context = {
         "form": form,
-        "object": obj,
-
+        "object":obj
     }
     return render(request, template_name, context)
 

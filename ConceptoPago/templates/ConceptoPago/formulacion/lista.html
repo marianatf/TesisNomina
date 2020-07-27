@@ -2,7 +2,7 @@
 {% load static %}
 {% block head_title %} Formulación {% endblock %}
 
-{% block title_page %} LISTADO DE FÓRMULAS / CONCEPTOS DE PAGO {% endblock %}
+{% block title_page %} LISTADO DE FÓRMULAS PARA CONCEPTOS DE PAGO {% endblock %}
 {% block subtitle_page %}  {% endblock %}
 
 {% block breadcrumb %}
@@ -36,8 +36,8 @@
                             <td>{{ object.pk }}</td>
                             <td>{{ object.descripcion |title }}</td>
                             <td>{{ object.formula |title }}</td>
-                            <td><a href="{% url 'Editar Formulacion' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
-                                <a href="{% url 'Eliminar Formulacion' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>
+                            <td><a href="{% url 'Editar Formulacion' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="feather icon-edit"></i></a>
+                                <a href="{% url 'Eliminar Formulacion' object.pk %}"><i style="font-size: 20px;" class="feather icon-trash-2"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

@@ -25,7 +25,6 @@
                         <th>Cédula</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
-                        <th>Edad</th>
                         <th>Status</th>
                         <th>Cargo a Optar</th>
                         <th>Acción</th>
@@ -38,12 +37,11 @@
                             <td>V-{{ object.cedula }}</td>
                             <td>{{ object.nombre |title }} {{ object.segundo_nombre |title }}</td>
                             <td>{{ object.apellido |title }} {{ object.segundo_apellido|title }}</td>
-                            <td>{{ object.edad }}</td>
                             <td>{{ object.get_status_display }}</td>
                             <td>{{ object.cargo_optar |title }}</td>
-                            <td><a href="{% url 'Ver Candidato' object.pk %}"><i style="font-size: 20px; margin-right: 15px;"class="fa fa-eye"></i></a>
-                                <a href="{% url 'Editar Candidato' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
-                                <a href="{% url 'Eliminar Candidato' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>
+                            <td><a href="{% url 'Ver Candidato' object.pk %}"><i style="font-size: 20px; margin-right: 15px;"class="feather icon-eye"></i></a>
+                                <a href="{% url 'Editar Candidato' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="feather icon-edit"></i></a>
+                                <a href="{% url 'Eliminar Candidato' object.pk %}"><i style="font-size: 20px;" class="feather icon-trash-2"></i></a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -54,7 +52,6 @@
                         <th>Cédula</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
-                        <th>Edad</th>
                         <th>Status</th>
                         <th>Cargo a Optar</th>
                         <th>Acción</th>

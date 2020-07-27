@@ -1,13 +1,16 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from datetime import datetime
+from datetime import date
 from django.db.models import Count
 from django.utils.safestring import mark_safe
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from dateutil.relativedelta import relativedelta
 
+
+def upload_location(instance, filename):
+    return "%s/%s" %(instance.id, filename)
 
 
 class Empresa(models.Model):
@@ -39,22 +42,31 @@ class Persona(models.Model):
         ('otro', 'Otro'),
         ('ninguno', 'Prefiero No Decirlo'),
     )
+    NACIONALIDAD = (
+        ('V','V'),
+        ('E','E')
+    )
     status = models.CharField(blank=True, null=True, choices=STATUS, max_length=30, default='desempleado', verbose_name='Estado De La Persona')
-    cedula = models.IntegerField(blank=True, null=True, verbose_name='Cedula')
+    cedula = models.IntegerField(verbose_name='Cedula')
     apellido = models.CharField(max_length=30, verbose_name='Primer Apellido')
     nombre = models.CharField(max_length=30, verbose_name='Primer Nombre')
     segundo_nombre = models.CharField(max_length=30, verbose_name='Segundo Nombre', blank=True, null=True)
     segundo_apellido = models.CharField(max_length=30, verbose_name='Segundo Apellido', blank=True, null=True)
     fecha_nacimiento = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True, verbose_name="Fecha de Nacimiento")
-    edad = models.IntegerField(blank=True, null=True, verbose_name='Edad')
     ocupacion_actual = models.CharField(max_length=30, verbose_name='Ocupacion Actual', blank=True, null=True)
     cargo_optar = models.CharField(max_length=30, verbose_name='Cargo a Optar', blank=True, null=True)
     email = models.EmailField(verbose_name='Email')
     telefono = models.CharField(max_length=30, verbose_name='Telefono')
     genero = models.CharField(choices=GENERO, max_length=50, null=True, blank=True)
     fecha_ingreso = models.DateField(auto_now=True)
-    imagen = models.ImageField(upload_to='empleados', blank=True, null=True)
+    imagen = models.ImageField(upload_to='candidato', blank=True, null=True)
     direccion = models.TextField(blank=True, null=True, verbose_name='Direccion')
+    profesion = models.CharField(max_length=30, blank=True, null=True)
+    estado = models.CharField(max_length=30, blank=True, null=True)
+    municipio = models.CharField(max_length=30, blank=True, null=True)
+    parroquia = models.CharField(max_length=30, blank=True, null=True)
+    nacionalidad = models.CharField(max_length=30, choices=NACIONALIDAD, default='V')
+    rif = models.CharField(max_length=30, blank=True, null=True)
 
     def year_betwen(self):
         return abs(self.fecha_ingreso - self.fecha_nacimiento)
@@ -69,7 +81,8 @@ class Persona(models.Model):
             return '%s, %s, %s, %s' % (self.nombre, self.segundo_nombre, self.apellido, self.segundo_apellido)
 
     def get_age(self):
-        return relativedelta(self.fecha_nacimiento.years(), datetime.date.now()).years
+        return int((date.today() - self.fecha_nacimiento).days/365.25)
+
 
     imagen_tag.short_description = 'Imagen'
     imagen_tag.allow_tags = True
@@ -186,10 +199,7 @@ class Rac(models.Model):
     fecha_creacion = models.DateField(auto_now=True)
     cargo_ocupado = models.BooleanField(default=False)
 
-    def save(self, *args, **kwargs):
-        # if self.compensacion:
-        #     self.sueldo = (self.codigo_escala.sueldo + self.compensacion)
-        super(Rac, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return ' %s.- %s  , %s' % (self.codigo_rac, self.codigo_cargo, self.codigo_departamento)
@@ -215,6 +225,26 @@ class Empleado(models.Model):
         ('otro', 'Otro'),
         ('ninguno', 'Prefiero No Decirlo'),
     )
+    NACIONALIDAD = (
+        ('V', 'V'),
+        ('E', 'E')
+    )
+    CIVIL = (
+        ('casado', 'Casado(a)'),
+        ('divorciado', 'Divorciado(a)'),
+        ('viudo', 'Viudo(a)'),
+        ('soltero', 'Soltero(a)'),
+    )
+    TIPOCUENTA = (
+        ('ahorro', 'Ahorro'),
+        ('corriente', 'Corriente'),
+    )
+    FORMAPAGO = (
+        ('efectivo', 'Efectivo'),
+        ('transferencia', 'Transferencia'),
+        ('deposito', 'Depósito'),
+        ('cheque', 'Cheque'),
+    )
     cedula = models.IntegerField(blank=True, null=True, verbose_name='Cedula')
     codigo_solicitud = models.OneToOneField(Persona, blank=True, null=True, on_delete=models.SET_NULL,verbose_name='Solicitud Empleado')
     apellido = models.CharField(max_length=30, verbose_name='Primer Apellido')
@@ -226,18 +256,45 @@ class Empleado(models.Model):
     fecha_ingreso = models.DateField(auto_now=False, auto_now_add=False, verbose_name='Fecha de Ingreso', blank=True,null=True)
     fecha_update = models.DateField(auto_now=True)
     fecha_nacimiento = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True, verbose_name="Fecha de Nacimiento")
-    edad = models.IntegerField(blank=True, null=True, verbose_name='Edad')
     email = models.EmailField(blank=True, null=True, verbose_name='Email')
     telefono = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefono')
     genero = models.CharField(choices=GENERO, max_length=50, null=True, blank=True)
     imagen = models.ImageField(upload_to='empleados', blank=True, null=True)
     status_trabajador = models.CharField(choices=STATUSE, max_length=30, default='Trabajando', verbose_name='Estado De La Persona')
     direccion = models.TextField(blank=True, null=True, verbose_name='Direccion')
+    profesion = models.CharField(max_length=30, blank=True, null=True)
+    estado = models.CharField(max_length=30, blank=True, null=True)
+    municipio = models.CharField(max_length=30, blank=True, null=True)
+    parroquia = models.CharField(max_length=30, blank=True, null=True)
+    nacionalidad = models.CharField(max_length=30, choices=NACIONALIDAD, default='V')
+    rif = models.CharField(max_length=30, blank=True, null=True)
+    estado_civil = models.CharField(choices=CIVIL, max_length=30, blank=True, null=True)
+    forma_pago = models.CharField(choices=FORMAPAGO, max_length=30, blank=True, null=True)
+    tipo_cuenta = models.CharField(choices=TIPOCUENTA, max_length=30, blank=True, null=True)
+    banco = models.CharField(max_length=30, blank=True, null=True)
+    cuenta = models.CharField(max_length=100, blank=True, null=True)
 
-    # def save(self, *args, **kwargs):
-    #     if self.codigo_rac:
-    #         self.sueldo = self.codigo_rac.sueldo
-    #     super(Empleado, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if self.codigo_solicitud:
+            self.cedula = self.codigo_solicitud.cedula
+            self.apellido = self.codigo_solicitud.apellido
+            self.nombre = self.codigo_solicitud.nombre
+            self.segundo_nombre = self.codigo_solicitud.segundo_nombre
+            self.segundo_apellido = self.codigo_solicitud.segundo_apellido
+            self.fecha_nacimiento  = self.codigo_solicitud.fecha_nacimiento
+            self.email = self.codigo_solicitud.email
+            self.telefono = self.codigo_solicitud.telefono
+            self.genero = self.codigo_solicitud.genero
+            self.imagen = self.codigo_solicitud.imagen
+            self.direccion = self.codigo_solicitud.direccion
+            self.profesion = self.codigo_solicitud.profesion
+            self.estado = self.codigo_solicitud.estado
+            self.municipio = self.codigo_solicitud.municipio
+            self.parroquia = self.codigo_solicitud.parroquia
+            self.nacionalidad = self.codigo_solicitud.nacionalidad
+            self.rif = self.codigo_solicitud.rif
+
+        super(Empleado, self).save(*args, **kwargs)
 
     def nombre_completo(self):
         return '%s %s ' % (self.nombre, self.apellido)
@@ -245,6 +302,8 @@ class Empleado(models.Model):
     def __str__(self):
         return '%s %s %s' % (self.codigo_empleado, self.nombre, self.apellido)
 
+    def get_age(self):
+        return int((date.today() - self.fecha_nacimiento).days/365.25)
     # def imagen_tag(self):
     #     if self.imagen:
     #         return mark_safe('<img src="%s" style="width: 45px; height:45px; margin-left: 30px" />' % self.imagen.url)

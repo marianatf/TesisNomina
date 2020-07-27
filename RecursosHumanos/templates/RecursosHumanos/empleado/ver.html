@@ -18,19 +18,21 @@
 <div class="col-lg-12">
     <div class="cover-profile">
         <div class="profile-bg-img">
-            <img class="profile-bg-img img-fluid" src="{% static 'assets/images/user-profile/bg-img.jpg' %}" alt="bg-img">
+            <img class="profile-bg-img img-fluid" src="{% static 'assets/images/user-profile/1.png' %}" alt="bg-img">
             <div class="card-block user-info">
                 <div class="col-md-12">
                     <div class="media-left">
                         <a href="#" class="profile-image">
-                            <img class="user-img img-radius" src="{% static 'assets/images/user-profile/user.png' %}" style="width: 100px; height:100px;" alt="user-img">
+
+<img class="user-img img-radius" src="{% static 'assets/images/user-profile/user.png' %}" style="width: 100px; height:100px;" alt="user-img">
+
                         </a>
                     </div>
                     <div class="media-body row">
                         <div class="col-lg-12">
                             <div class="user-title">
                                 <h2>{{object.nombre |title}} {{object.segundo_nombre |title}} {{object.apellido |title}} {{object.segundo_apellido |title}}</h2>
-                                <span class="text-white">{{object.ocupacion_actual |title}}</span>
+                                <span class="text-white">{{object.cargo |title}}</span>
                             </div>
                         </div>
                     </div>
@@ -45,6 +47,8 @@
 <div class="card">
 <!--    <div class="card-header"><h5 style="text-transform: uppercase;"></h5>
     </div>-->
+
+
     <div class="card-block">
         <div class="view-info">
             <div class="row">
@@ -100,16 +104,13 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">Cédula</th>
-                                                <td>V-{{object.cedula |title}}</td>
+                                                <td>{{object.nacionalidad |title}}-{{object.cedula |title}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">RIF</th>
-                                                <td></td>
+                                                <td>{{object.rif |title}}</td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">Género</th>
-                                                <td>{{object.get_genero_display}}</td>
-                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -120,8 +121,12 @@
                                     <table class="table">
                                         <tbody>
                                         <tr>
+                                                <th scope="row">Género</th>
+                                                <td>{{object.get_genero_display}}</td>
+                                            </tr>
+                                        <tr>
                                                 <th scope="row">Nacionalidad</th>
-                                                <td></td>
+                                                <td>{{object.nacionalidad |title}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Fecha de Nacimiento</th>
@@ -129,24 +134,17 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">Edad</th>
-                                                <td>{{object.edad}}</td>
+                                                <td>{{object.get_age}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Estado Civil</th>
-                                                <td></td>
+                                                <td>{{object.get_estado_civil_display}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Profesión</th>
-                                                <td></td>
+                                                <td>{{object.profesion |title}}</td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">Nro. de Hijos</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Pasaporte</th>
-                                                <td></td>
-                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -184,11 +182,11 @@
                                             </tr>
                                              <tr>
                                                 <th scope="row">Estado</th>
-                                                <td></td>
+                                                <td>{{object.estado |title}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Municipio</th>
-                                                <td></td>
+                                                <td>{{object.municipio |title}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -203,7 +201,7 @@
                                         <tbody>
                                         <tr>
                                                 <th scope="row">Parroquia</th>
-                                                <td></td>
+                                                <td>{{object.parroquia}}</td>
                                             </tr>
                                              <tr>
                                                 <th scope="row">E-mail</th>
@@ -247,11 +245,11 @@
                                         <tbody>
                                         <tr>
                                                 <th scope="row">Forma de Pago</th>
-                                                <td></td>
+                                                <td>{{object.get_forma_pago_display}}</td>
                                             </tr>
                                              <tr>
                                                 <th scope="row">Tipo de Cuenta</th>
-                                                <td></td>
+                                                <td>{{object.get_tipo_cuenta_display}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -267,11 +265,11 @@
 
                                             <tr>
                                                 <th scope="row">Entidad Bancaria</th>
-                                                <td></td>
+                                                <td>{{object.banco |title}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Cuenta Bancaria</th>
-                                                <td></td>
+                                                <td>{{object.cuenta}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -306,11 +304,11 @@
                                         <tbody>
                                         <tr>
                                                 <th scope="row">Cargo</th>
-                                                <td>{{object.cargo |title}}</td>
+                                                <td>{{object.codigo_rac.codigo_cargo.cargo |title}}</td>
                                             </tr>
                                              <tr>
                                                 <th scope="row">Departamento</th>
-                                                <td>{{object.departamento}}</td>
+                                                <td>{{object.codigo_rac.codigo_departamento.descripcion |title}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

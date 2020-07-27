@@ -33,24 +33,19 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Cargo *</label>
         <div class="col-sm-10">
-        {% render_field form.codigo_cargo class="form-control" type="text" %}
+        {% render_field form.codigo_cargo class="form-control"  %}
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Escala de Sueldo *</label>
         <div class="col-sm-10">
-        {% render_field form.codigo_escala class="form-control" type="text" %}
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Cargo Ocupado *</label>
-        <div class="col-sm-10">
-        {% render_field form.cargo_ocupado  class=" " %}
+        {% render_field form.codigo_escala class="form-control"  %}
         </div>
     </div>
 
+
     <div class="form-group">
-            <input class="btn btn-success btn-round btn-block" type="submit" value="Guardar"></input>
+            <input class="btn btn-success btn-round" type="submit" value="Guardar"></input>
     </div>
 </form>
 </div>

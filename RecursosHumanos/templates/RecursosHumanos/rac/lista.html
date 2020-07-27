@@ -27,7 +27,7 @@
                         <th>Departamento</th>
                         <th>Cargo</th>
                         <th>Escala</th>
-                        <th>Cargo Ocupado</th>
+                        <th>Ocupado</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -38,9 +38,13 @@
                             <td>{{ object.codigo_departamento |title }}</td>
                             <td>{{ object.codigo_cargo |title }}</td>
                             <td>{{ object.codigo_escala |title }}</td>
-                            <td>{{ object.cargo_ocupado |title }}</td>
-                            <td><a href="{% url 'Editar Rac' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="fa fa-edit"></i></a>
-                                <a href="{% url 'Eliminar Rac' object.pk %}"><i style="font-size: 20px;" class="fa fa-times"></i></a>
+                        {% if object.cargo_ocupado is True %}
+                            <td><i class="feather icon-check"></i></td>
+                        {% else %}
+                            <td><i class="feather icon-x"></i></td>
+                        {% endif %}
+                            <td><a href="{% url 'Editar Rac' object.pk %}"><i style="font-size: 20px; margin-right: 15px;" class="feather icon-edit"></i></a>
+                                <a href="{% url 'Eliminar Rac' object.pk %}"><i style="font-size: 20px;" class="feather icon-trash-2"></i></a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -51,7 +55,7 @@
                         <th>Departamento</th>
                         <th>Cargo</th>
                         <th>Escala</th>
-                        <th>Cargo Ocupado</th>
+                        <th>Ocupado</th>
                         <th>Acción</th>
                     </tr>
                 </tfoot>

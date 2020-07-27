@@ -30,20 +30,20 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Formula *</label>
+        <label class="col-sm-2 col-form-label">Fórmula *</label>
         <div class="col-sm-10">
         {% render_field form.formula  id='id_formula' readonly='readonly' class="form-control" type="text" %}
         </div>
     </div>
 
-</form>
+
 </div>
 </div>
 
 <div class="card">
     <div class="card-header">
         <div class="card-header-left">
-            <h5>Calculadora</h5>
+            <h5>Opciones para el cálculo</h5>
         </div>
 
     </div>
@@ -51,36 +51,37 @@
         <div class="submit-row">
 <div>
 
-<button class='btn btn-inverse btn-round' type="button" onclick="sueldo1()" >Sueldo</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="anosserv()" >Años Servicio</button>
-
-<button class='btn btn-inverse btn-round'type="button" onclick="suma()" value="+">+</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="resta()" value="-">-</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="parentesis1()" value="(">(</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="parentesis2()" value=")">)</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="mult()" value="*">*</button>
+<button class="btn btn-warning" type="button" onclick="sueldo1()">Sueldo</button>
+<button class="btn btn-warning" type="button" onclick="anosserv()">Años de Servicio</button>
+<div style='margin-top:10px;'>
+<button class='btn btn-warning'type="button" onclick="suma()" value="+">+</button>
+<button class='btn btn-warning'type="button" onclick="resta()" value="-">-</button>
+<button class='btn btn-warning'type="button" onclick="mult()" value="*">*</button>
+<button class='btn btn-warning'type="button" onclick="divi()" value="*">/</button>
+<button class='btn btn-warning'type="button" onclick="parentesis1()" value="(">(</button>
+<button class='btn btn-warning'type="button" onclick="parentesis2()" value=")">)</button>
 </div>
 <div style='margin-top:10px;'>
 
-<button class='btn btn-inverse btn-round'type="button" onclick="i1()" value="0">1</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="i2()" value="1">2</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="i3()" value="2">3</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="i4()" value="3">4</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="i5()" value="4">5</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="i6()" value="5">6</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="i7()" value="6">7</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="i8()" value="7">8</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="i9()" value="8">9</button>
-<button class='btn btn-inverse btn-round'type="button" onclick="i0()" value="9">0</button>
+<button class='btn btn-warning'type="button" onclick="i1()" value="0">1</button>
+<button class='btn btn-warning'type="button" onclick="i2()" value="1">2</button>
+<button class='btn btn-warning'type="button" onclick="i3()" value="2">3</button>
+<button class='btn btn-warning'type="button" onclick="i4()" value="3">4</button>
+<button class='btn btn-warning'type="button" onclick="i5()" value="4">5</button>
+<button class='btn btn-warning'type="button" onclick="i6()" value="5">6</button>
+<button class='btn btn-warning'type="button" onclick="i7()" value="6">7</button>
+<button class='btn btn-warning'type="button" onclick="i8()" value="7">8</button>
+<button class='btn btn-warning'type="button" onclick="i9()" value="8">9</button>
+<button class='btn btn-warning'type="button" onclick="i0()" value="9">0</button>
 
-    <button class='btn btn-danger btn-round'  type="button" onclick="eraseText()">Limpiar</button>
-</div></div></div></div>
+    <button class='btn btn-danger'  type="button" onclick="eraseText()">Limpiar</button>
+</div></div></div></div></div>
 
 
         <div class="card">
     <div class="card-header">
         <div class="card-header-left">
-            <h5>Variables</h5>
+            <h5>Variables para el cálculo</h5>
         </div>
 
     </div>
@@ -90,7 +91,7 @@
 <div class="content-box-large">
 {% for object in object_list_2 %}
 
-		<button class="btn btn-inverse btn-round" style="margin: 5px" onclick="p{{object.pk}}()">{{object.descripcion}}: {{ object.monto }}</button>
+		<span class="btn btn-warning" style="" onclick="p{{object.pk}}()">{{object.descripcion}}: {{ object.monto }}</span>
 
 
             <script>
@@ -199,7 +200,8 @@ document.getElementById("id_formula").value += "0";
 </script>
 
     <div class="form-group">
-            <input class="btn btn-success btn-round btn-block" type="submit" value="Guardar"></input>
+            <input class="btn btn-success btn-round" type="submit" value="Guardar"></input>
     </div>
+</form>
 {% endblock %}
 
