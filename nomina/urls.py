@@ -23,6 +23,8 @@ from ProcesoNomina.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='Dashboard'),
+    path('login/', LoginPage, name='Login'),
+    path('logout/', LogoutUser, name='Logout'),
     path('candidato/', PersonaLista, name='Lista Candidato'),
     path('candidato/crear', PersonaCrear, name='Crear Candidato'),
     path('candidato/editar/<int:pk>', PersonaEditar, name='Editar Candidato'),

@@ -14,23 +14,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 
-def LoginPage(request):
-    if request.method =='POST':
-        usernames = request.POST['username']
-        passwords = request.POST['password']
-        user = authenticate(request, username=usernames, password=passwords)
-        if user is not None:
-            login(request, user)
-            # Redirect to a success page.
-            return redirect('Dashboard')
-        else:
-            messages.info(request, 'Usuario o Clave Erroneo')
-    context = {}
-    return render(request, 'RecursosHumanos/login.html',context)
 
-def LogoutUser(request):
-    logout(request)
-    return redirect('login')
 
 
 

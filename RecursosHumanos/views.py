@@ -12,6 +12,31 @@ from django.views import View
 from ProcesoNomina.models import *
 from django.db.models import Sum
 from django.forms import modelformset_factory, inlineformset_factory
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from .decorators import unauthenticated_user
+from django.contrib.auth.decorators import login_required
+
+
+@unauthenticated_user
+def LoginPage(request):
+    if request.method =='POST':
+        usernames = request.POST['username']
+        passwords = request.POST['password']
+        user = authenticate(request, username=usernames, password=passwords)
+        if user is not None:
+            login(request, user)
+            # Redirect to a success page.
+            return redirect('Dashboard')
+        else:
+            messages.info(request, 'Usuario o Clave Erroneo')
+    context = {}
+    return render(request, 'RecursosHumanos/login.html',context)
+
+def LogoutUser(request):
+    logout(request)
+    return redirect('Login')
+
 
 def myview(request):
     form = EmpleadoForm(request.POST)
@@ -26,8 +51,7 @@ def myview(request):
         return render(request, 'RecursosHumanos/empleados/crear.html', content)
 
 
-
-
+@login_required(login_url='Login')
 def home(request):
     solicitud = Persona.objects.all().count()
     empleados = Empleado.objects.all().count()
