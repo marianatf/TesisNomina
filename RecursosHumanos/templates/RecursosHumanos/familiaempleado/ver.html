@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block head_title %} Agregar Familia {% endblock %}
+{% block title_page %} Agregar Familia {% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'Lista Escala'%}">Listado de Escalas</a>
+</li>
+<li class="breadcrumb-item"><a href="#!">Agregar Familia</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h5>* Campo Obligatorio</h5>
+        <span></span>
+        <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
+    </div>
+    <div class="card-block">
+        <form method='POST' action="" enctype='multipart/form-data'>
+    {% csrf_token %}
+            {{ formset.management_form }}
+            {% for form in formset.forms %}
+
+<div class="form-group row">
+
+    <label class="col-sm-2 col-form-label">Primer Nombre *</label>
+            <div class="col-sm-4">
+                {% render_field form.nombre class="form-control" type="text" %}
+            </div>
+    <label class="col-sm-2 col-form-label">Segundo Nombre </label>
+            <div class="col-sm-4">
+        {% render_field form.segundo_nombre class="form-control" type="text" %}
+            </div>
+        </div>
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Primer Apellido *</label>
+            <div class="col-sm-4">
+                {% render_field form.apellido class="form-control" type="text" %}
+            </div>
+    <label class="col-sm-2 col-form-label">Segundo Apellido </label>
+            <div class="col-sm-4">
+        {% render_field form.segundo_apellido class="form-control" type="text" %}
+            </div>
+        </div>
+
+            <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Número de Cédula *</label>
+            <div class="col-sm-4">
+                {% render_field form.cedula class="form-control" type="text" %}
+            </div>
+    <label class="col-sm-2 col-form-label">Fecha de Nacimiento </label>
+            <div class="col-sm-4">
+
+        {% render_field form.fecha_nacimiento class="form-control" type="date" %}
+            </div>
+        </div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Eliminar Familiar</label>
+            <div class="col-sm-1">
+                {% render_field form.DELETE class="form-control" type="checkbox" %}
+            </div>
+    <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-4">
+            </div>
+        </div>
+
+    {{ form.errors.as_ul }}
+                    {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+            <br>
+            <br>
+            {% endfor %}
+
+    <div class="form-group">
+            <input class="btn btn-success btn-round" type="submit" value="Guardar"></input>
+    </div>
+
+</form>
+</div>
+</div>
+
+
+
+
+<script src="{% static 'assets/js/jquery.formset.js' %}"></script>
+
+{% endblock %}

@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 # from .models import BlogPost
 from .models import *
 from django.contrib.admin.widgets import AdminDateWidget
+from django.forms import inlineformset_factory
 
 class EmpresaForm(forms.ModelForm):
     class Meta:
@@ -55,6 +56,17 @@ class EmpleadoForm(forms.ModelForm):
             super().__init__(*args, **kwargs)
             self.fields['codigo_solicitud'].widget.attrs['onchange'] = "load_email()"
 
+class FamiliaEmpleadoForm(forms.ModelForm):
+    class Meta:
+        model = FamiliaEmpleado
+        exclude = ()
+FamiliaEmpleadoFormSet = inlineformset_factory(Empleado, FamiliaEmpleado, form=FamiliaEmpleadoForm, extra=2, max_num=5)
+
+class EducacionEmpleadoForm(forms.ModelForm):
+    class Meta:
+        model = EducacionEmpleado
+        exclude = ()
+EducacionEmpleadoFormSet = inlineformset_factory(Empleado, EducacionEmpleado, form=EducacionEmpleadoForm, extra=1, max_num=3)
 
 # class BlogPostForm(forms.Form):
 #     title = forms.CharField()

@@ -2,11 +2,11 @@
 {% load widget_tweaks  %}
 {% block head_title %} Nómina {% endblock %}
 {% load static %}
-{% block title_page %} Información Prenomina {% endblock %}
+{% block title_page %} Información Nomina {% endblock %}
 {% block subtitle_page %} {% endblock %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item"><a href="{% url 'Lista Variable'%}">Nómina</a>
+<li class="breadcrumb-item"><a href="{% url 'Lista Nomina'%}">Nómina</a>
 </li>
 <li class="breadcrumb-item"><a href="#!">Exportar</a>
 </li>
@@ -15,8 +15,8 @@
 {% block content %}
 <div class="card">
     <div class="card-header">
-            <span>Fecha: {{object.fecha_final}} <br> Monto Total = {{total_emp}} <br> Descripción: {{object.descripcion}}</span>
-        <div style="text-align: right;"><a href="{%url 'Pdf Todos' object.pk %}"><button class="btn btn-primary btn-round">Exportar PDF</button></a></div>
+            <span>Fecha: {{object.codigo_prenomina.fecha_final}} <br> Monto Total = {{total_emp}} <br> Descripción: {{object.codigo_prenomina.descripcion}}</span>
+        <div style="text-align: right;"><a href="{%url 'Pdf Nomina' object.pk %}"><button class="btn btn-primary btn-round">Exportar PDF</button></a></div>
     </div>
     <div class="card-block">
         <div class="view-info">

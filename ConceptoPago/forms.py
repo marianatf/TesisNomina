@@ -19,6 +19,7 @@ class ElementoPagoForm(forms.ModelForm):
         fields = ['descripcion','codigo_ad','codigo_formula','frecuencia','codigo_fv','empleado_pago']
 
 class PagoEmpleadoForm(forms.ModelForm):
+    elemento_pago = forms.ModelChoiceField(queryset=ElementoPago.objects.filter(pagoempleado__prenomina__nomina__isnull=True))
     class Meta:
         model = PagoEmpleado
         fields = ['codigo_pago','codigo_empleado','elemento_pago','cantidad','monto','formula']

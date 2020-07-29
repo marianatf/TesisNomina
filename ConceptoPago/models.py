@@ -62,8 +62,10 @@ class ElementoPago(models.Model):
     pago = models.ManyToManyField('self', through='PagoEmpleado', symmetrical=False)
 
     def save(self, *args, **kwargs):
-        # if self.codigo_ad == 'prestamo':
-
+        if self.pk is not None:
+            originals = PagoEmpleado.objects.filter(elemento_pago=self.pk)
+            for original in originals:
+                original.save()
         super(ElementoPago, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -77,7 +79,7 @@ class ElementoPago(models.Model):
 
 class PagoEmpleado(models.Model):
     codigo_pago = models.AutoField(unique=True, primary_key=True)
-    codigo_empleado = models.ForeignKey(Empleado, on_delete=models.SET_NULL, blank=True, null=True)
+    codigo_empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, blank=True, null=True)
     elemento_pago = models.ForeignKey(ElementoPago, on_delete=models.CASCADE, blank=True, null=True)
     cantidad = models.IntegerField(blank=True, null=True, default='1')
     monto = models.DecimalField(decimal_places=2, max_digits=20, default='0', blank=True, null=True)
@@ -121,7 +123,7 @@ class PagoEmpleado(models.Model):
             codigo_fv = None
             descripcion = None
 
-        return 'Empleado: %s, %s , %s, %s ->  %s' % (
+        return 'Empleado: %s | %s | %s | %s =  %s' % (
         self.codigo_empleado, codigo_ad, codigo_fv, descripcion, self.monto)
 
 

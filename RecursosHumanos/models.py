@@ -78,7 +78,7 @@ class Persona(models.Model):
             return 'No Existe'
 
     def __str__(self):
-            return '%s, %s, %s, %s' % (self.nombre, self.segundo_nombre, self.apellido, self.segundo_apellido)
+            return '(%s) %s %s %s %s' % (self.pk,self.nombre, self.segundo_nombre, self.apellido, self.segundo_apellido)
 
     def get_age(self):
         return int((date.today() - self.fecha_nacimiento).days/365.25)
@@ -156,7 +156,7 @@ class Escala(models.Model):
         db_table = 'escala_sueldo'
 
     def __str__(self):
-        return ' Escala %s | Grado %s | Paso %s | Sueldo: %s' % (self.escala, self.grado, self.paso, self.sueldo)
+        return ' Escala %s | Grado %s | Paso %s | Sueldo = %s' % (self.escala, self.grado, self.paso, self.sueldo)
 
 
 class Departamento(models.Model):
@@ -202,7 +202,7 @@ class Rac(models.Model):
 
 
     def __str__(self):
-        return ' %s.- %s  , %s' % (self.codigo_rac, self.codigo_cargo, self.codigo_departamento)
+        return ' (%s) %s, %s' % (self.codigo_rac, self.codigo_cargo, self.codigo_departamento)
 
     class Meta:
         ordering = ['codigo_rac','codigo_departamento']
@@ -214,10 +214,8 @@ class Rac(models.Model):
 class Empleado(models.Model):
     codigo_empleado = models.AutoField(unique=True, primary_key=True)
     STATUSE = (
-        ('trabajando', 'Trabajando'),
         ('nuevo_ingreso', 'Nuevo Ingreso'),
-        ('activo', 'Activo')
-
+        ('trabajando', 'Activo'),
     )
     GENERO = (
         ('masculino', 'Masculino'),
@@ -247,8 +245,8 @@ class Empleado(models.Model):
     )
     cedula = models.IntegerField(blank=True, null=True, verbose_name='Cedula')
     codigo_solicitud = models.OneToOneField(Persona, blank=True, null=True, on_delete=models.SET_NULL,verbose_name='Solicitud Empleado')
-    apellido = models.CharField(max_length=30, verbose_name='Primer Apellido')
-    nombre = models.CharField(max_length=30, verbose_name='Primer Nombre')
+    apellido = models.CharField(max_length=30,blank=True, null=True, verbose_name='Primer Apellido')
+    nombre = models.CharField(max_length=30,blank=True, null=True, verbose_name='Primer Nombre')
     segundo_nombre = models.CharField(max_length=30, verbose_name='Segundo Nombre', blank=True, null=True)
     segundo_apellido = models.CharField(max_length=30, verbose_name='Segundo Apellido', blank=True, null=True)
     codigo_rac = models.OneToOneField(Rac, on_delete=models.SET_NULL, blank=True, null=True)
@@ -260,13 +258,13 @@ class Empleado(models.Model):
     telefono = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefono')
     genero = models.CharField(choices=GENERO, max_length=50, null=True, blank=True)
     imagen = models.ImageField(upload_to='empleados', blank=True, null=True)
-    status_trabajador = models.CharField(choices=STATUSE, max_length=30, default='Trabajando', verbose_name='Estado De La Persona')
+    status_trabajador = models.CharField(choices=STATUSE,blank=True, null=True, max_length=30, default='Trabajando', verbose_name='Estado De La Persona')
     direccion = models.TextField(blank=True, null=True, verbose_name='Direccion')
     profesion = models.CharField(max_length=30, blank=True, null=True)
     estado = models.CharField(max_length=30, blank=True, null=True)
     municipio = models.CharField(max_length=30, blank=True, null=True)
     parroquia = models.CharField(max_length=30, blank=True, null=True)
-    nacionalidad = models.CharField(max_length=30, choices=NACIONALIDAD, default='V')
+    nacionalidad = models.CharField(max_length=30,blank=True, null=True, choices=NACIONALIDAD, default='V')
     rif = models.CharField(max_length=30, blank=True, null=True)
     estado_civil = models.CharField(choices=CIVIL, max_length=30, blank=True, null=True)
     forma_pago = models.CharField(choices=FORMAPAGO, max_length=30, blank=True, null=True)
@@ -300,10 +298,12 @@ class Empleado(models.Model):
         return '%s %s ' % (self.nombre, self.apellido)
 
     def __str__(self):
-        return '%s %s %s' % (self.codigo_empleado, self.nombre, self.apellido)
+        return '(%s) %s %s' % (self.codigo_empleado, self.nombre, self.apellido)
 
     def get_age(self):
-        return int((date.today() - self.fecha_nacimiento).days/365.25)
+        if self.fecha_nacimiento:
+            return int((date.today() - self.fecha_nacimiento).days/365.25)
+        return None
     # def imagen_tag(self):
     #     if self.imagen:
     #         return mark_safe('<img src="%s" style="width: 45px; height:45px; margin-left: 30px" />' % self.imagen.url)

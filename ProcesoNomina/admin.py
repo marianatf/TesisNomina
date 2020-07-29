@@ -8,7 +8,18 @@
 # from .models import Prenomina, Nomina, PrenominaSummary
 # #from import_export import resources
 # from django.db.models import Q
-#
+from django.contrib import admin
+# from .models import Variable, Formulacion, ElementoPago, PagoEmpleado, Sales, Products
+# from django.db.models import Count
+from .models import *
+
+@admin.register(Prenomina)
+class PrenominaAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Nomina)
+class NominaAdmin(admin.ModelAdmin):
+    pass
 #
 # class InputFilter(admin.SimpleListFilter):
 #     template = 'admin/input_filter.html'

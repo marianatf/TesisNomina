@@ -89,7 +89,11 @@ urlpatterns = [
     path('nomina/crear', NominaCrear, name='Crear Nomina'),
     path('nomina/ver/<int:pk>', NominaVer, name='Ver Nomina'),
 
-    path('render/<int:pk>/',Pdf.as_view(), name='Pdf Todos')
+    path('render/<int:pk>/',Pdf.as_view(), name='Pdf Todos'),
+    path('render-nomina/<int:pk>/',PdfNomina.as_view(), name='Pdf Nomina'),
+
+    path('empleado/<int:pk>/familia', FamiliaEmpleadoVer, name='Familia Empleado'),
+    path('empleado/<int:pk>/educacion', EducacionEmpleadoVer, name='Educacion Empleado'),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

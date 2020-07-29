@@ -1,137 +1,194 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block head_title %} Dashboard{% endblock %}
+{% block head_title %} Dashboard {% endblock %}
 {% load widget_tweaks %}
-
+{% block title_page %} Información General de {{object.nombre}} {% endblock %}
+{% block subtitle_page %} Dashboard {% endblock %}
 {% block content %}
+
 <div class="row">
-<div class="col-xl-3 col-md-6">
-<div class="card bg-c-yellow update-card">
-    <div class="card-block">
-        <div class="row align-items-end">
-            <div class="col-8">
-                <h4 class="text-white"> {{objectpersona}} </h4>
-                <h6 class="text-white m-b-0">Candidatos</h6>
-            </div>
-            <div class="col-4 text-right"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <canvas id="update-chart-1" height="50" style="display: block; width: 45px; height: 50px;" width="45"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="card-footer">
-    </div>
-</div>
-</div>
-
-
-<div class="col-xl-3 col-md-6">
-    <div class="card bg-c-green update-card">
-        <div class="card-block">
-            <div class="row align-items-end">
-                <div class="col-8">
-                    <h4 class="text-white">{{objectempleados}}</h4>
-                    <h6 class="text-white m-b-0">Empleados</h6>
-                </div>
-                <div class="col-4 text-right"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                    <canvas id="update-chart-2" height="50" width="45" style="display: block; width: 45px; height: 50px;"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer">
-        </div>
-    </div>
-</div>
-
-<div class="col-xl-3 col-md-6">
-    <div class="card bg-c-pink update-card">
-        <div class="card-block">
-            <div class="row align-items-end">
-                <div class="col-8">
-                    <h4 class="text-white">{{objectrac}}</h4>
-                    <h6 class="text-white m-b-0">Vacantes</h6>
-                </div>
-                <div class="col-4 text-right"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                    <canvas id="update-chart-3" height="50" width="45" style="display: block; width: 45px; height: 50px;"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer">
-        </div>
-    </div>
-</div>
-
-<div class="col-xl-3 col-md-6">
-<div class="card bg-c-lite-green update-card">
-    <div class="card-block">
-        <div class="row align-items-end">
-            <div class="col-8">
-                <h4 class="text-white">{{objectdepartamento}}</h4>
-                <h6 class="text-white m-b-0">Departamentos</h6>
-            </div>
-            <div class="col-4 text-right"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <canvas id="update-chart-4" height="50" width="45" style="display: block; width: 45px; height: 50px;"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="card-footer">
-    </div>
-</div>
-</div>
-
 
 <div class="col-xl-12 col-md-12">
 <div class="card user-card-full">
     <div class="row m-l-0 m-r-0">
-        <div class="col-sm-4 bg-c-lite-green user-profile">
+        <div class="col-sm-4 card bg-c-blue update-card user-profile">
             <div class="card-block text-center text-white">
                 <div class="m-b-25">
-                    <img src="{% static 'assets/images/user-profile/images.jpg' %}" style="width: 200px;height: 200px;" class="img-radius" alt="User-Profile-Image">
+                    <img src="{% static 'assets/images/user-profile/logo.jpg' %}" style="width: 200px;height: 200px; margin-top: 43px;" class="img-radius" alt="User-Profile-Image">
                 </div>
-                <h6 class="f-w-600">{{object.nombre}}</h6>
-                <p>{{object.ceo}}</p>
+                <h6 class="f-w-600"></h6>
             </div>
         </div>
         <div class="col-sm-8">
             <div class="card-block">
-                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Informacion</h6>
+                <h6 class="sub-title">Información</h6>
                 <div class="row">
                     <div class="col-sm-6">
-                        <p class="m-b-10 f-w-600">E-mail</p>
-                        <h6 class="text-muted f-w-400"><a  class="__cf_email__" data-cfemail="1379767d6a53747e727a7f3d707c7e">[email&nbsp;protected]</a></h6>
+                        <h6 class="text-muted m-b-10 f-w-600">E-mail:</h6>
+                        <p class="text-muted m-b-10 f-w-600">loremipsum@gmail.com</p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="m-b-10 f-w-600">Telefono</p>
-                        <h6 class="text-muted f-w-400">0023-333-526136</h6>
+                        <h6 class="text-muted m-b-10 f-w-600">Teléfonos:</h6>
+                        <p class="text-muted m-b-10 f-w-600">(+58) 0000000</p>
+                        <p class="text-muted m-b-10 f-w-600">(+58) 0000000</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <h6 class="text-muted m-b-10 f-w-600">Dirección:</h6>
+                        <p class="text-muted m-b-10 f-w-600">Dummy Address Lorem Ipsum Sit Amet Dummy Pin Dummy place.</p>
                     </div>
                 </div>
-                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Nóminas Ejecutadas</h6>
+<!--                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600" style="font-size: 16px;">Nómina de Empleados</h6>
                 <div class="row">
                     <div class="col-sm-6">
-                        <p class="m-b-10 f-w-600">{{total}} $</p>
-                        <h6 class="text-muted f-w-400">Total Pagado</h6>
+                        <h6 class="text-muted m-b-10 f-w-600">Ejecutadas:</h6>
+                        <p class="text-muted m-b-10 f-w-600">{{total_n}}</p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="m-b-10 f-w-600">{{total_n}}</p>
-                        <h6 class="text-muted f-w-400">Nominas Ejecutadas</h6>
+                        <h6 class="text-muted m-b-10 f-w-600">Total Pagado:</h6>
+                        <p class="text-muted m-b-10 f-w-600">[campo&nbsp;protegido]</p>
                     </div>
-                </div>
-                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Descripcion</h6>
+                </div>-->
+                <h6 class="m-b-20 m-t-40 sub-title">Propósito de la Organización</h6>
                 <div class="row">
                     <div class="col-sm-12">
-                        <h6 class="text-muted f-w-400">{{object.proposito}}</h6>
+                        <p class="text-muted m-b-10 f-w-600">{{object.proposito}}</p>
                     </div>
 
                 </div>
-                <ul class="social-link list-unstyled m-t-40 m-b-10">
-                    <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook"><i class="feather icon-facebook facebook" aria-hidden="true"></i></a></li>
-                    <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter"><i class="feather icon-twitter twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram"><i class="feather icon-instagram instagram" aria-hidden="true"></i></a></li>
-                </ul>
             </div>
         </div>
     </div>
 </div>
 </div>
 
-</div>
+        <div class="col-sm-12 col-xl-12" style="margin-top: 45px;">
+    <h4 class="sub-title" style="font-weight: bold">Resumen de RR.HH.</h4></div>
+        <div class="col-xl-3 col-md-6">
+        <div class="card card bg-c-blue update-card text-white">
+            <div class="card-block">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="m-b-5">Empleados</h6>
+                        <h4 class="m-b-0">{{objectempleados}}</h4>
+                    </div>
+                    <div class="col col-auto text-right">
+                        <i class="feather icon-users f-50 text-c-blue"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card card bg-c-blue update-card text-white">
+            <div class="card-block">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="m-b-5">Candidatos</h6>
+                        <h4 class="m-b-0">{{objectpersona}}</h4>
+                    </div>
+                    <div class="col col-auto text-right">
+                        <i class="feather icon-user-plus f-50 text-c-blue"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card card bg-c-blue update-card text-white">
+            <div class="card-block">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="m-b-5">Vacantes</h6>
+                        <h4 class="m-b-0">{{objectrac}}</h4>
+                    </div>
+                    <div class="col col-auto text-right">
+                        <i class="feather icon-user-minus f-50 text-c-blue"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card card bg-c-blue update-card text-white">
+            <div class="card-block">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="m-b-5">Cargos</h6>
+                        <h4 class="m-b-0">{{objectcargo}}</h4>
+                    </div>
+                    <div class="col col-auto text-right">
+                        <i class="feather icon-briefcase f-50 text-c-blue"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-xl-12" style="margin-top: 45px;">
+    <h4 class="sub-title" style="font-weight: bold">Resumen de Nómina</h4></div>
+                                            <div class="col-xl-6 col-md-12">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center m-l-0">
+                                                            <div class="col-auto">
+                                                                <i class="feather icon-book f-30 text-c-green"></i>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <h6 class="text-muted m-b-10">Nóminas Ejecutadas</h6>
+                                                                <h2 class="m-b-0">{{total_n}}</h2>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-md-12">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center m-l-0">
+                                                            <div class="col-auto">
+                                                                <i class="feather icon-credit-card f-30 text-c-green"></i>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <h6 class="text-muted m-b-10">Total Pagado</h6>
+                                                                <h2 class="m-b-0">{{total}}</h2>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+<div class="col-sm-12 col-xl-12" style="margin-top: 130px;">
+    <h4 class="sub-title" style="font-weight: bold">Redes Sociales</h4></div>
+
+                                               <div class="col-md-6 col-xl-4">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="feather icon-facebook bg-c-green card1-icon"></i>
+                                                        <span class="text-c-green f-w-600">Facebook</span>
+                                                        <p>@loremipsum</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-xl-4">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="feather icon-twitter bg-c-green card1-icon"></i>
+                                                        <span class="text-c-green f-w-600">Twitter</span>
+                                                        <p>@loremipsum</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-xl-4">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="feather icon-instagram bg-c-green card1-icon"></i>
+                                                        <span class="text-c-green f-w-600">Instagram</span>
+                                                        <p>@loremipsum</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
 {% endblock %}

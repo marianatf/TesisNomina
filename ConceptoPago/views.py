@@ -3,7 +3,9 @@ from .models import *
 # Create your views here.
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='Login')
 def VariableLista(request):
     obj = Variable.objects.all()
     template_name = 'ConceptoPago/variable/lista.html'
@@ -12,6 +14,7 @@ def VariableLista(request):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def VariableCrear(request):
     form = VariableForm()
     if request.method == 'POST':
@@ -28,6 +31,7 @@ def VariableCrear(request):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def VariableEditar(request, pk):
     obj = get_object_or_404(Variable, pk=pk)
     form = VariableForm(instance=obj)
@@ -43,7 +47,7 @@ def VariableEditar(request, pk):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='Login')
 def VariableBorrar(request, pk):
     obj = get_object_or_404(Variable, pk=pk)
     template_name = 'ConceptoPago/variable/borrar.html'
@@ -54,7 +58,7 @@ def VariableBorrar(request, pk):
     return render(request, template_name, context)
 
 
-
+@login_required(login_url='Login')
 def FormulacionLista(request):
     obj = Formulacion.objects.all()
     template_name = 'ConceptoPago/formulacion/lista.html'
@@ -63,6 +67,7 @@ def FormulacionLista(request):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def FormulacionCrear(request):
     form = FormulacionForm()
     obj = Variable.objects.all()
@@ -81,6 +86,7 @@ def FormulacionCrear(request):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def FormulacionEditar(request, pk):
     obj = get_object_or_404(Formulacion, pk=pk)
     obj2 = Variable.objects.all()
@@ -99,7 +105,7 @@ def FormulacionEditar(request, pk):
     return render(request, template_name, context)
 
 
-
+@login_required(login_url='Login')
 def FormulacionBorrar(request, pk):
     obj = get_object_or_404(Formulacion, pk=pk)
     template_name = 'ConceptoPago/formulacion/borrar.html'
@@ -109,15 +115,16 @@ def FormulacionBorrar(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
-
+@login_required(login_url='Login')
 def ElementoPagoLista(request):
-    obj = ElementoPago.objects.all()
+    obj =  ElementoPago.objects.filter(pagoempleado__prenomina__nomina__isnull=True).distinct()
     template_name = 'ConceptoPago/elementopago/lista.html'
     context = {
         'objects': obj
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def ElementoPagoCrear(request):
     form = ElementoPagoForm()
     obj = Variable.objects.all()
@@ -136,6 +143,7 @@ def ElementoPagoCrear(request):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def ElementoPagoEditar(request, pk):
     obj = get_object_or_404(ElementoPago, pk=pk)
     form = ElementoPagoForm(instance=obj)
@@ -152,7 +160,7 @@ def ElementoPagoEditar(request, pk):
     return render(request, template_name, context)
 
 
-
+@login_required(login_url='Login')
 def ElementoPagoBorrar(request, pk):
     obj = get_object_or_404(ElementoPago, pk=pk)
     template_name = 'ConceptoPago/elementopago/borrar.html'
@@ -162,15 +170,16 @@ def ElementoPagoBorrar(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
-
+@login_required(login_url='Login')
 def PagoEmpleadoLista(request):
-    obj = PagoEmpleado.objects.all()
+    obj = PagoEmpleado.objects.filter(prenomina__nomina__isnull=True)
     template_name = 'ConceptoPago/pagoempleado/lista.html'
     context = {
         'objects': obj
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def PagoEmpleadoCrear(request):
     form = PagoEmpleadoForm()
     if request.method == 'POST':
@@ -179,6 +188,7 @@ def PagoEmpleadoCrear(request):
             obj = form.save()
             obj.user = request.user
             obj.save()
+
             form = PagoEmpleadoForm()
             return redirect("Lista PagoEmpleado")
     template_name = 'ConceptoPago/pagoempleado/crear.html'
@@ -187,7 +197,7 @@ def PagoEmpleadoCrear(request):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def PagoEmpleadoEditar(request, pk):
     obj = get_object_or_404(PagoEmpleado, pk=pk)
     form = PagoEmpleadoForm(instance=obj)
@@ -203,7 +213,7 @@ def PagoEmpleadoEditar(request, pk):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='Login')
 def PagoEmpleadoBorrar(request, pk):
     obj = get_object_or_404(PagoEmpleado, pk=pk)
     template_name = 'ConceptoPago/pagoempleado/borrar.html'

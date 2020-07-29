@@ -17,7 +17,6 @@ from django.contrib.auth.decorators import login_required
 
 
 
-
 class Pdf(View):
 
     def get(self, request, pk):
@@ -35,15 +34,37 @@ class Pdf(View):
         }
         return Render.render('ProcesoNomina/pdfall.html', params)
 
+class PdfNomina(View):
 
+    def get(self, request, pk):
+        obj = Nomina.objects.get(pk=pk)
+        sales = Prenomina.objects.filter(pk=obj.codigo_prenomina.pk)
+        today = Prenomina.objects.filter(pk=obj.codigo_prenomina.pk)[0]
+        prueba = Prenomina.objects.get(pk=obj.codigo_prenomina.pk).pagos_empleados.all()
+        total_empleados = Prenomina.objects.get(pk=obj.codigo_prenomina.pk).pagos_empleados.all().aggregate(Sum('monto'))['monto__sum']
+        params = {
+            'today': today,
+            'sales': sales,
+            'request': request,
+            'prenominapago':prueba,
+            'total_emp': total_empleados,
+
+        }
+        return Render.render('ProcesoNomina/pdfall2.html', params)
+
+
+
+@login_required(login_url='Login')
 def PrenominaLista(request):
-    obj = Prenomina.objects.all()
+    obj = Prenomina.objects.all().filter(editar=True)
     template_name = 'ProcesoNomina/prenomina/lista.html'
     context = {
         'objects': obj
     }
     return render(request, template_name , context)
 
+
+@login_required(login_url='Login')
 def PrenominaVer(request, pk):
     obj = Prenomina.objects.get(pk=pk)
     sales = Prenomina.objects.filter(pk=pk)
@@ -61,6 +82,7 @@ def PrenominaVer(request, pk):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def PrenominaCrear(request):
     form = PrenominaForm()
     if request.method == 'POST':
@@ -76,7 +98,7 @@ def PrenominaCrear(request):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def PrenominaEditar(request, pk):
     obj = get_object_or_404(Prenomina, pk=pk)
     form = PrenominaForm(instance=obj)
@@ -93,7 +115,7 @@ def PrenominaEditar(request, pk):
     return render(request, template_name, context)
 
 
-
+@login_required(login_url='Login')
 def PrenominaBorrar(request, pk):
     obj = get_object_or_404(Prenomina, pk=pk)
     template_name = 'ProcesoNomina/prenomina/borrar.html'
@@ -103,6 +125,7 @@ def PrenominaBorrar(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
+@login_required(login_url='Login')
 def NominaLista(request):
     obj = Nomina.objects.all()
     template_name = 'ProcesoNomina/nomina/lista.html'
@@ -111,12 +134,13 @@ def NominaLista(request):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def NominaVer(request, pk):
     obj = Nomina.objects.get(pk=pk)
-    sales = Prenomina.objects.filter(pk=obj.prenomina)
-    today = Prenomina.objects.filter(pk=obj.prenomina)[0]
-    prueba = Prenomina.objects.get(pk=obj.prenomina).pagos_empleados.all()
-    total_empleados = Prenomina.objects.get(pk=obj.prenomina).pagos_empleados.all().aggregate(Sum('monto'))['monto__sum']
+    sales = Prenomina.objects.filter(pk=obj.codigo_prenomina.pk)
+    today = Prenomina.objects.filter(pk=obj.codigo_prenomina.pk)[0]
+    prueba = Prenomina.objects.get(pk=obj.codigo_prenomina.pk).pagos_empleados.all()
+    total_empleados = Prenomina.objects.get(pk=obj.codigo_prenomina.pk).pagos_empleados.all().aggregate(Sum('monto'))['monto__sum']
     template_name = 'ProcesoNomina/nomina/ver.html'
     context = {
         'object': obj,
@@ -128,6 +152,7 @@ def NominaVer(request, pk):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def NominaCrear(request):
     form = NominaForm()
     if request.method == 'POST':

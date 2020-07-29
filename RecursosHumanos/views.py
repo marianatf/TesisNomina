@@ -37,7 +37,7 @@ def LogoutUser(request):
     logout(request)
     return redirect('Login')
 
-
+@login_required(login_url='Login')
 def myview(request):
     form = EmpleadoForm(request.POST)
     if form.is_valid():
@@ -55,17 +55,17 @@ def myview(request):
 def home(request):
     solicitud = Persona.objects.all().count()
     empleados = Empleado.objects.all().count()
-    departamento = Departamento.objects.all().count()
+    cargo = Cargo.objects.all().count()
     rac = Rac.objects.all().filter(cargo_ocupado=False).count()
     empresa = get_object_or_404(Empresa, pk=1)
-    total_empleados = Prenomina.objects.all().prefetch_related('pagos_empleados').aggregate(Sum('pagos_empleados__monto'))['pagos_empleados__monto__sum']
+    total_empleados = Nomina.objects.all().prefetch_related('codigo_prenomina__pagos_empleados').aggregate(Sum('codigo_prenomina__pagos_empleados__monto'))['codigo_prenomina__pagos_empleados__monto__sum']
     nomina = Nomina.objects.all().count()
 
     context = {
         'objectpersona':solicitud,
         'objectempleados': empleados,
         'objectrac':rac,
-        'objectdepartamento':departamento,
+        'objectcargo':cargo,
         'object':empresa,
         'total':total_empleados,
         'total_n':nomina
@@ -73,7 +73,7 @@ def home(request):
     }
     return render(request, 'RecursosHumanos/home.html', context)
 
-
+@login_required(login_url='Login')
 def PersonaLista(request):
     obj = Persona.objects.all()
     template_name = 'RecursosHumanos/persona/lista.html'
@@ -82,7 +82,7 @@ def PersonaLista(request):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def PersonaCrear(request):
     form = PersonaForm()
     if request.method == 'POST':
@@ -103,7 +103,7 @@ def PersonaCrear(request):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def PersonaEditar(request, pk):
     obj = get_object_or_404(Persona, pk=pk)
     form = PersonaForm(instance=obj)
@@ -119,6 +119,8 @@ def PersonaEditar(request, pk):
     }
     return render(request, template_name, context)
 
+
+@login_required(login_url='Login')
 def PersonaVer(request, pk):
     obj = Persona.objects.get(pk=pk)
     template_name = 'RecursosHumanos/persona/ver.html'
@@ -127,7 +129,7 @@ def PersonaVer(request, pk):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def PersonaBorrar(request, pk):
     obj = get_object_or_404(Persona, pk=pk)
     template_name = 'RecursosHumanos/persona/borrar.html'
@@ -137,7 +139,7 @@ def PersonaBorrar(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
-
+@login_required(login_url='Login')
 def PersonaAgregar(request, pk):
     obj = get_object_or_404(Persona, pk=pk)
     template_name = 'RecursosHumanos/persona/familia.html'
@@ -150,6 +152,7 @@ def PersonaAgregar(request, pk):
                "formset":formset}
     return render(request, template_name, context)
 
+@login_required(login_url='Login')
 def EscalaLista(request):
     obj = Escala.objects.all()
     template_name = 'RecursosHumanos/escala/lista.html'
@@ -158,7 +161,7 @@ def EscalaLista(request):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def EscalaCrear(request):
     form = EscalaForm()
     if request.method == 'POST':
@@ -174,7 +177,7 @@ def EscalaCrear(request):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def EscalaEditar(request, pk):
     obj = get_object_or_404(Escala, pk=pk)
     form = EscalaForm(instance=obj)
@@ -190,6 +193,7 @@ def EscalaEditar(request, pk):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='Login')
 def EscalaBorrar(request, pk):
     obj = get_object_or_404(Escala, pk=pk)
     template_name = 'RecursosHumanos/escala/borrar.html'
@@ -199,6 +203,7 @@ def EscalaBorrar(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
+@login_required(login_url='Login')
 def DepartamentoLista(request):
     obj = Departamento.objects.all()
     template_name = 'RecursosHumanos/departamento/lista.html'
@@ -207,7 +212,7 @@ def DepartamentoLista(request):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def DepartamentoCrear(request):
     form = DepartamentoForm()
     if request.method == 'POST':
@@ -223,6 +228,7 @@ def DepartamentoCrear(request):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def DepartamentoEditar(request, pk):
     obj = get_object_or_404(Departamento, pk=pk)
     form = DepartamentoForm(instance=obj)
@@ -238,6 +244,7 @@ def DepartamentoEditar(request, pk):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='Login')
 def DepartamentoBorrar(request, pk):
     obj = get_object_or_404(Departamento, pk=pk)
     template_name = 'RecursosHumanos/departamento/borrar.html'
@@ -247,6 +254,8 @@ def DepartamentoBorrar(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
+
+@login_required(login_url='Login')
 def CargoLista(request):
     obj = Cargo.objects.all()
     template_name = 'RecursosHumanos/cargo/lista.html'
@@ -255,7 +264,7 @@ def CargoLista(request):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def CargoCrear(request):
     form = CargoForm()
     if request.method == 'POST':
@@ -271,6 +280,7 @@ def CargoCrear(request):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def CargoEditar(request, pk):
     obj = get_object_or_404(Cargo, pk=pk)
     form = CargoForm(instance=obj)
@@ -286,7 +296,7 @@ def CargoEditar(request, pk):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='Login')
 def CargoBorrar(request, pk):
     obj = get_object_or_404(Cargo, pk=pk)
     template_name = 'RecursosHumanos/cargo/borrar.html'
@@ -296,6 +306,7 @@ def CargoBorrar(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
+@login_required(login_url='Login')
 def RacLista(request):
     obj = Rac.objects.all()
     template_name = 'RecursosHumanos/rac/lista.html'
@@ -304,6 +315,7 @@ def RacLista(request):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def RacCrear(request):
     form = RacForm()
     if request.method == 'POST':
@@ -319,6 +331,8 @@ def RacCrear(request):
     }
     return render(request, template_name , context)
 
+
+@login_required(login_url='Login')
 def RacEditar(request, pk):
     obj = get_object_or_404(Rac, pk=pk)
     form = RacForm(instance=obj)
@@ -334,7 +348,7 @@ def RacEditar(request, pk):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='Login')
 def RacBorrar(request, pk):
     obj = get_object_or_404(Rac, pk=pk)
     template_name = 'RecursosHumanos/rac/borrar.html'
@@ -344,6 +358,8 @@ def RacBorrar(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
+
+@login_required(login_url='Login')
 def EmpleadoLista(request):
     obj = Empleado.objects.all()
     template_name = 'RecursosHumanos/empleado/lista.html'
@@ -352,7 +368,7 @@ def EmpleadoLista(request):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def EmpleadoCrear(request):
     form = EmpleadoForm()
     if request.method == 'POST':
@@ -368,7 +384,7 @@ def EmpleadoCrear(request):
     }
     return render(request, template_name , context)
 
-
+@login_required(login_url='Login')
 def EmpleadoEditar(request, pk):
     obj = get_object_or_404(Empleado, pk=pk)
     form = EmpleadoForm(instance=obj)
@@ -384,6 +400,7 @@ def EmpleadoEditar(request, pk):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='Login')
 def EmpleadoVer(request, pk):
     obj = Empleado.objects.get(pk=pk)
     template_name = 'RecursosHumanos/empleado/ver.html'
@@ -392,6 +409,7 @@ def EmpleadoVer(request, pk):
     }
     return render(request, template_name , context)
 
+@login_required(login_url='Login')
 def EmpleadoBorrar(request, pk):
     obj = get_object_or_404(Empleado, pk=pk)
     template_name = 'RecursosHumanos/empleado/borrar.html'
@@ -401,19 +419,27 @@ def EmpleadoBorrar(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
-# def LoginPage(request):
-#     form = IngresoEmpresaForm()
-#     if request.method =='POST':
-#         usernames = request.POST['username']
-#         passwords = request.POST['password']
-#
-#         user = authenticate(request, username=usernames, password=passwords)
-#         if user is not None:
-#             login(request, user)
-#             return redirect('/system/%s/dashboard' %(form.empresa))
-#         else:
-#             messages.info(request, 'Username or Password is Wrong')
-#     context = {
-#         'empresas':obj
-#     }
-#     return render(request, 'accounts/login.html',context)
+
+def FamiliaEmpleadoVer(request, pk):
+    obj = Empleado.objects.get(pk=pk)
+    formset = FamiliaEmpleadoFormSet(request.POST or None, instance=obj)
+    if formset.is_valid():
+        formset.save()
+        return redirect('Lista Empleado')
+    template_name = 'RecursosHumanos/familiaempleado/ver.html'
+    context = {
+        "formset":formset
+    }
+    return render(request, template_name, context)
+
+def EducacionEmpleadoVer(request, pk):
+    obj = Empleado.objects.get(pk=pk)
+    formset = EducacionEmpleadoFormSet(request.POST or None, instance=obj)
+    if formset.is_valid():
+        formset.save()
+        return redirect('Lista Empleado')
+    template_name = 'RecursosHumanos/educacionempleado/ver.html'
+    context = {
+        "formset":formset
+    }
+    return render(request, template_name, context)

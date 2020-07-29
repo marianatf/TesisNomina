@@ -1,7 +1,7 @@
 from django.contrib import admin
 # from .models import Variable, Formulacion, ElementoPago, PagoEmpleado, Sales, Products
 # from django.db.models import Count
-from .models import Variable
+from .models import *
 
 
 #
@@ -10,6 +10,12 @@ from .models import Variable
 #
 @admin.register(Variable)
 class VariableAdmin(admin.ModelAdmin):
+    pass
+@admin.register(PagoEmpleado)
+class PagoEmpleadoAdmin(admin.ModelAdmin):
+    pass
+@admin.register(ElementoPago)
+class ElementoPagoAdmin(admin.ModelAdmin):
     pass
 #
 #

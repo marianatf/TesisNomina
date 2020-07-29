@@ -23,6 +23,7 @@
         <form method='POST' >
             {% csrf_token %}
 
+            {% if object.editar is True %}
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Tipo de nómina *</label>
         <div class="col-sm-10">
@@ -50,10 +51,42 @@
         <div class="form-group row">
         <label class="col-sm-2 col-form-label">Fecha Final * </label>
         <div class="col-sm-10">
-        {% render_field form.fecha_final class="form-control" type="date" %}
+        {% render_field form.fecha_final  class="form-control" type="date" %}
         </div>
     </div>
+            {% else %}
 
+     <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Tipo de nómina *</label>
+        <div class="col-sm-10">
+        {% render_field form.tipo readonly='readonly' class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Descripción</label>
+        <div class="col-sm-10">
+        {% render_field form.descripcion readonly='readonly' class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Seleccionar Pagos de Empleados *</label>
+        <div class="col-sm-10">
+        {% render_field form.pagos_empleados readonly='readonly' class="form-control" type="text" %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Fecha Inicio * </label>
+        <div class="col-sm-10">
+        {% render_field form.fecha_inicio readonly='readonly' class="form-control" type="date" %}
+        </div>
+    </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Fecha Final * </label>
+        <div class="col-sm-10">
+        {% render_field form.fecha_final readonly='readonly' class="form-control" type="date" %}
+        </div>
+    </div>
+            {% endif %}
     <div class="form-group">
             <input class="btn btn-success btn-round" type="submit" value="Guardar"></input>
     </div>
