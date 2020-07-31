@@ -38,7 +38,6 @@ class ElementoPago(models.Model):
     AD = (
         ('asignacion', 'Asignación'),
         ('deduccion', 'Deducción'),
-        ('prestamo', 'Préstamo'),
     )
     FV = (
         ('fijo', 'Fijo'),
@@ -97,14 +96,16 @@ class PagoEmpleado(models.Model):
                 self.formula = self.formula.replace(
                     "(relativedelta.relativedelta(datetime.now(),self.self.codigo_empleado.fecha_ingreso)).years",
                     "(años-servicio)")
-            # else:
-            #     self.monto = self.elemento_pago.codigo_formula.formula
-            # if self.elemento_pago.codigo_ad == 'deduccion':
-            #     self.monto = self.monto * -1
-            # if self.cantidad > 0:
-            #     self.monto = self.monto * self.cantidad
-        # if self.elemento_pago.codigo_ad == 'prestamo':
-
+            else:
+                self.monto = self.elemento_pago.codigo_formula.formula
+            if self.elemento_pago.codigo_ad == 'deduccion':
+                self.monto = self.monto * -1
+            if self.cantidad > 0:
+                self.monto = self.monto * self.cantidad
+        else:
+            self.monto = self.monto
+            if self.cantidad > 0:
+                self.monto = self.monto * self.cantidad
         super(PagoEmpleado, self).save(*args, **kwargs)
 
     class Meta:
@@ -116,14 +117,12 @@ class PagoEmpleado(models.Model):
     def __str__(self):
         if self.elemento_pago:
             codigo_ad = self.elemento_pago.codigo_ad
-            codigo_fv = self.elemento_pago.codigo_fv
             descripcion = self.elemento_pago.descripcion
         else:
             codigo_ad = None
-            codigo_fv = None
             descripcion = None
 
-        return 'Empleado: %s | %s | %s | %s =  %s' % (
-        self.codigo_empleado, codigo_ad, codigo_fv, descripcion, self.monto)
+        return '%s | %s | %s =  %s' % (
+        self.codigo_empleado, codigo_ad, descripcion, self.monto)
 
 

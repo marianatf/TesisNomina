@@ -8,7 +8,7 @@ class PrenominaForm(forms.ModelForm):
     pagos_empleados = forms.ModelMultipleChoiceField(queryset=PagoEmpleado.objects.filter(prenomina__nomina__isnull=True))
     class Meta:
         model = Prenomina
-        fields = ['tipo','descripcion','pagos_empleados','fecha_inicio','fecha_final']
+        fields = ['descripcion','pagos_empleados','fecha_inicio','fecha_final']
 class NominaForm(forms.ModelForm):
     codigo_prenomina = forms.ModelChoiceField(queryset=Prenomina.objects.all().filter(editar=True))
     class Meta:

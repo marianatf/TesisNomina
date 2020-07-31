@@ -28,18 +28,12 @@ UNIVERSITY = ['Michigan', 'UBA', 'USB', 'UCV', 'California']
 TITULO = ['ING', 'LIC', 'DOC', 'MSc']
 
 LUGARES = ['Informatica','Finanzas','Gerencia General']
-def add_escalas(n):
-	for entry in range(n):
-		for grados in range(n):
-			for pasos in range(n):
-				sueldo = fakegen.ean(length=8)
-				sueldof = float(sueldo) + (entry * 2)
-				try:
-					escala = Escala.objects.get_or_create(escala=(escala_nivel[entry]), grado=(grados), paso=(pasos),
-														  sueldo=sueldof)[0]
-					escala.save()
-				except:
-					pass
+# def add_escalas(n=1):
+# 	try:
+# 		escala = Escala.objects.get_or_create(escala=(escala_nivel[n]), grado=(n), paso=(n),sueldo=fakegen.)[0]
+# 		escala.save()
+# 	except:
+# 		pass
 
 
 def add_persona():
@@ -63,7 +57,7 @@ def add_persona():
 									  email=fakegen.email(),
 									  telefono=fakegen.phone_number(),
 									  genero=random.choice(generos),
-									  edad=fakegen.random_digit_not_null()+20
+
 
 									  )[0]
 	a.save()
@@ -164,24 +158,22 @@ def empleado(rac):
 									  email=fakegen.email(),
 									  telefono=fakegen.phone_number(),
 									  genero=random.choice(generos),
-									  codigo_rac=rac,
-									sueldo=fakegen.random_digit_not_null()*100,
-									   edad=fakegen.random_digit_not_null()+20)[0]
+									  codigo_rac=rac)[0]
 	a.save()
 	print(a)
 	return a
 
 
-# for a in range(1, 10):
-# 	cantidad_v = random.choice(CANTIDAD)
-# 	personac = add_persona()
+for a in range(1, 6):
+	cantidad_v = random.choice(CANTIDAD)
+	personac = add_persona()
 # 	for a in range(1, cantidad_v):
 # 		add_familia(personac)
 # 	empleado(rac(add_escalas(1),add_cargo(),add_departamento()))
 
 
-for a in range(1, 10):
-	empleado(rac(add_escalas(1),add_cargo(),add_departamento()))
+# for a in range(1, 2):
+# 	empleado(rac(add_escalas(1),add_cargo(),add_departamento()))
 
 #add_escalas()
 # if __name__ == '__main__':

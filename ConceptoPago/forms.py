@@ -16,7 +16,7 @@ class FormulacionForm(forms.ModelForm):
 class ElementoPagoForm(forms.ModelForm):
     class Meta:
         model = ElementoPago
-        fields = ['descripcion','codigo_ad','codigo_formula','frecuencia','codigo_fv','empleado_pago']
+        fields = ['descripcion','codigo_ad','codigo_formula','empleado_pago']
 
 class PagoEmpleadoForm(forms.ModelForm):
     elemento_pago = forms.ModelChoiceField(queryset=ElementoPago.objects.filter(pagoempleado__prenomina__nomina__isnull=True))

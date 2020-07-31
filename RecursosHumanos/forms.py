@@ -48,6 +48,7 @@ class RacForm(forms.ModelForm):
 
 class EmpleadoForm(forms.ModelForm):
     codigo_rac = forms.ModelChoiceField(queryset=Rac.objects.all().filter(cargo_ocupado=False))
+    codigo_solicitud = forms.ModelChoiceField(queryset=Persona.objects.all().filter(empleado__isnull=True), required=False)
     class Meta:
         model = Empleado
         fields = ['cedula', 'codigo_solicitud', 'apellido', 'nombre', 'segundo_apellido', 'segundo_nombre', 'codigo_solicitud', 'codigo_rac', 'sueldo', 'fecha_nacimiento', 'email', 'telefono', 'genero', 'imagen', 'status_trabajador', 'direccion','fecha_ingreso', 'profesion', 'estado', 'municipio', 'parroquia', 'nacionalidad', 'rif', 'estado_civil', 'forma_pago', 'tipo_cuenta', 'banco', 'cuenta']
@@ -66,7 +67,7 @@ class EducacionEmpleadoForm(forms.ModelForm):
     class Meta:
         model = EducacionEmpleado
         exclude = ()
-EducacionEmpleadoFormSet = inlineformset_factory(Empleado, EducacionEmpleado, form=EducacionEmpleadoForm, extra=1, max_num=3)
+EducacionEmpleadoFormSet = inlineformset_factory(Empleado, EducacionEmpleado, form=EducacionEmpleadoForm, extra=2, max_num=3)
 
 # class BlogPostForm(forms.Form):
 #     title = forms.CharField()

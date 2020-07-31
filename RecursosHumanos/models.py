@@ -7,6 +7,7 @@ from django.utils.safestring import mark_safe
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from dateutil.relativedelta import relativedelta
+from django.shortcuts import render, get_object_or_404, redirect
 
 
 def upload_location(instance, filename):
@@ -81,7 +82,9 @@ class Persona(models.Model):
             return '(%s) %s %s %s %s' % (self.pk,self.nombre, self.segundo_nombre, self.apellido, self.segundo_apellido)
 
     def get_age(self):
-        return int((date.today() - self.fecha_nacimiento).days/365.25)
+        if self.fecha_nacimiento:
+            return int((date.today() - self.fecha_nacimiento).days / 365.25)
+        return None
 
 
     imagen_tag.short_description = 'Imagen'
@@ -184,7 +187,6 @@ class Cargo(models.Model):
         return self.cargo
 
     class Meta:
-        ordering = ['cargo']
         verbose_name = "Cargo"
         verbose_name_plural = "Cargos"
         db_table = 'cargo'
@@ -258,7 +260,7 @@ class Empleado(models.Model):
     telefono = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefono')
     genero = models.CharField(choices=GENERO, max_length=50, null=True, blank=True)
     imagen = models.ImageField(upload_to='empleados', blank=True, null=True)
-    status_trabajador = models.CharField(choices=STATUSE,blank=True, null=True, max_length=30, default='Trabajando', verbose_name='Estado De La Persona')
+    status_trabajador = models.CharField(choices=STATUSE,blank=True, null=True, max_length=30, default='Activo', verbose_name='Estado De La Persona')
     direccion = models.TextField(blank=True, null=True, verbose_name='Direccion')
     profesion = models.CharField(max_length=30, blank=True, null=True)
     estado = models.CharField(max_length=30, blank=True, null=True)

@@ -53,7 +53,7 @@ def myview(request):
 
 @login_required(login_url='Login')
 def home(request):
-    solicitud = Persona.objects.all().count()
+    solicitud = Persona.objects.all().filter(empleado__isnull=True).count()
     empleados = Empleado.objects.all().count()
     cargo = Cargo.objects.all().count()
     rac = Rac.objects.all().filter(cargo_ocupado=False).count()
@@ -75,7 +75,7 @@ def home(request):
 
 @login_required(login_url='Login')
 def PersonaLista(request):
-    obj = Persona.objects.all()
+    obj = Persona.objects.all().filter(empleado__isnull=True)
     template_name = 'RecursosHumanos/persona/lista.html'
     context = {
         'objects': obj

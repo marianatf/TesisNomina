@@ -24,7 +24,6 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tipo de Nómina</th>
                         <th>Descripción</th>
                         <th>Fecha de Ejecución</th>
                         <th>Cantidad de Empleados</th>
@@ -36,7 +35,6 @@
                     {% for object in objects %}
                     <tr>
                             <td>{{ object.pk }}</td>
-                            <td>{{ object.get_tipo_display |title }}</td>
                             <td>{{ object.descripcion |title  }}</td>
                             <td>{{ object.fecha_final }}</td>
                             <td>{{ object.pagos_empleados.count }}</td>
@@ -51,7 +49,6 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>Tipo de Nómina</th>
                         <th>Descripción</th>
                         <th>Fecha de Ejecución</th>
                         <th>Cantidad de Empleados</th>

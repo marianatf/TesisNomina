@@ -17,9 +17,6 @@ from .models import *
 class PrenominaAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(Nomina)
-class NominaAdmin(admin.ModelAdmin):
-    pass
 #
 # class InputFilter(admin.SimpleListFilter):
 #     template = 'admin/input_filter.html'

@@ -1,8 +1,9 @@
+{% load static %}
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Sales Report</title>
+    <title>Pre-Nómina</title>
     <style type="text/css">
         @page {
             size: A4;
@@ -52,6 +53,9 @@
             list-style: none;
             font-size: 1.1em;
         }
+        body {
+            background-image: url("logo.jpg");
+        }
 
     </style>
 </head>
@@ -60,21 +64,20 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3>Reportes Pre-Nomina - {{ today.fecha_final| date:"d/m/Y" }} </h3>
+            <div class="imagenes"></div>
+            <h1>Reporte Pre-Nómina | {{ today.fecha_final| date:"d/m/Y" }} </h1>
         </div>
 
         <div class="list-group">
-            <p>Descripcion: {{ today.descripcion }} </p>
-        </div>
-        <div class="list-group">
-            <p>Tipo: {{ today.tipo }} </p>
+            <h3>Descripción: {{ today.descripcion |title}} </h3>
         </div>
 
-        <table class="table">
+
+        <table class="table" style="margin-top: 50px;">
             <thead>
             <tr>
                 <th style=''>Empleado</th>
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <th>Monto</th>
                 <th>Tipo</th>
                 <th style="color: white;"> A</th>
@@ -83,8 +86,8 @@
             <tbody>
             {% for sale in prenominapago %}
                 <tr>
-                    <td>{{ sale.codigo_empleado.nombre}}, {{ sale.codigo_empleado.apellido}}</td>
-                    <td>{{ sale.elemento_pago.descripcion}}</td>
+                    <td>{{ sale.codigo_empleado.nombre |title}}, {{ sale.codigo_empleado.apellido |title}}</td>
+                    <td>{{ sale.elemento_pago.descripcion |title}}</td>
                     <td>{{ sale.monto}}</td>
                     <td>{{ sale.elemento_pago.codigo_ad | upper }}</td>
                     <td style="color: white;">A</td>
@@ -93,7 +96,7 @@
 
 
             <tr style="font-weight:bold; border-top:2px solid #DDDDDD;">
-            <td> Total de montos </td>
+            <td> Total </td>
             <td>   </td>
             <td> {{total_emp}}  </td>
             <td>  </td>

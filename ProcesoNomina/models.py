@@ -12,7 +12,6 @@ class Prenomina(models.Model):
         ('ejecutivo', 'Ejecutivo'),
     )
     codigo_prenomina = models.AutoField(unique=True, primary_key=True)
-    tipo = models.CharField(choices=PG, max_length=30, default='trabajadores', verbose_name='Tipo de Nomina')
     descripcion = models.CharField(max_length=50, blank=True, null=True)
     pagos_empleados = models.ManyToManyField(PagoEmpleado)
     fecha_inicio = models.DateField(blank=True, null=True, verbose_name='Fecha Inicio Periodo')
