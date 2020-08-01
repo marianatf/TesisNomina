@@ -1,0 +1,6 @@
+django==2.2
+django-widget-tweaks
+pillow
+python-dateutil
+xhtml2pdf
+faker

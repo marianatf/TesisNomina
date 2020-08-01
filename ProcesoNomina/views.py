@@ -168,3 +168,31 @@ def NominaCrear(request):
         "form": form,
     }
     return render(request, template_name , context)
+
+
+
+@login_required(login_url='Login')
+def EmpleadoPrenominaVer(request, pk, empleado):
+    obj = Prenomina.objects.get(pk=pk).pagos_empleados.filter(codigo_empleado__pk=empleado)
+    nombre = obj[0].codigo_empleado
+    total_emp = Prenomina.objects.get(pk=pk).pagos_empleados.filter(codigo_empleado__pk=empleado).aggregate(Sum('monto'))['monto__sum']
+    template_name = 'ProcesoNomina/empleado/ver.html'
+    context = {
+        'objects':obj,
+        'object2':nombre,
+        'total':total_emp
+    }
+    return render(request, template_name , context)
+
+@login_required(login_url='Login')
+def EmpleadoNominaVer(request, pk, empleado):
+    obj = Nomina.objects.get(pk=pk).codigo_prenomina.pagos_empleados.filter(codigo_empleado__pk=empleado)
+    nombre = obj[0].codigo_empleado
+    total_emp = Nomina.objects.get(pk=pk).codigo_prenomina.pagos_empleados.filter(codigo_empleado__pk=empleado).aggregate(Sum('monto'))['monto__sum']
+    template_name = 'ProcesoNomina/empleado/ver2.html'
+    context = {
+        'objects':obj,
+        'object2':nombre,
+        'total':total_emp
+    }
+    return render(request, template_name , context)

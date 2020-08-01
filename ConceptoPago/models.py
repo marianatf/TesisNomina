@@ -86,7 +86,7 @@ class PagoEmpleado(models.Model):
 
     def save(self, *args, **kwargs):
         if self.elemento_pago:
-            if self.elemento_pago.codigo_formula:
+            if self.elemento_pago.codigo_formula and ("(sueldo)" in self.elemento_pago.codigo_formula.formula or "(años-servicio)" in self.elemento_pago.codigo_formula.formula ):
                 self.formula = self.elemento_pago.codigo_formula.formula
                 self.formula = self.formula.replace("(sueldo)", "(self.codigo_empleado.codigo_rac.codigo_escala.sueldo)")
                 self.formula = self.formula.replace("(años-servicio)",
@@ -97,7 +97,7 @@ class PagoEmpleado(models.Model):
                     "(relativedelta.relativedelta(datetime.now(),self.self.codigo_empleado.fecha_ingreso)).years",
                     "(años-servicio)")
             else:
-                self.monto = self.elemento_pago.codigo_formula.formula
+                self.monto = eval(self.elemento_pago.codigo_formula.formula)
             if self.elemento_pago.codigo_ad == 'deduccion':
                 self.monto = self.monto * -1
             if self.cantidad > 0:

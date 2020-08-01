@@ -84,10 +84,12 @@ urlpatterns = [
     path('prenomina/editar/<int:pk>', PrenominaEditar, name='Editar Prenomina'),
     path('prenomina/eliminar/<int:pk>', PrenominaBorrar, name='Eliminar Prenomina'),
     path('prenomina/ver/<int:pk>', PrenominaVer, name='Ver Prenomina'),
+    path('prenomina/ver/<int:pk>/empleado/<int:empleado>', EmpleadoPrenominaVer, name='Ver Prenomina Empleado'),
 
     path('nomina/', NominaLista, name='Lista Nomina'),
     path('nomina/crear', NominaCrear, name='Crear Nomina'),
     path('nomina/ver/<int:pk>', NominaVer, name='Ver Nomina'),
+    path('nomina/ver/<int:pk>/empleado/<int:empleado>', EmpleadoNominaVer, name='Ver Nomina Empleado'),
 
     path('render/<int:pk>/',Pdf.as_view(), name='Pdf Todos'),
     path('render-nomina/<int:pk>/',PdfNomina.as_view(), name='Pdf Nomina'),

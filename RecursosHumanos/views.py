@@ -16,6 +16,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .decorators import unauthenticated_user
 from django.contrib.auth.decorators import login_required
+from ConceptoPago.models import *
+from ProcesoNomina.models import *
 
 
 @unauthenticated_user
@@ -403,6 +405,8 @@ def EmpleadoEditar(request, pk):
 @login_required(login_url='Login')
 def EmpleadoVer(request, pk):
     obj = Empleado.objects.get(pk=pk)
+    empleado_ad = Nomina.objects.get(pk=1).codigo_prenomina.pagos_empleados.filter(codigo_empleado__pk=1)
+    total_pagado = Nomina.objects.all().filter(codigo_prenomina__pagos_empleados__codigo_empleado__pk=1).aggregate(Sum('codigo_prenomina__pagos_empleados__monto'))['codigo_prenomina__pagos_empleados__monto__sum']
     template_name = 'RecursosHumanos/empleado/ver.html'
     context = {
         'object': obj

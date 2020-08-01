@@ -91,13 +91,13 @@
 <div class="content-box-large">
 {% for object in object_list_2 %}
 
-		<span class="btn btn-warning" style="" onclick="p{{object.pk}}()">{{object.descripcion}}: {{ object.monto }}</span>
+		<span class="btn btn-warning" style="" onclick="p{{object.pk}}()">{{object.descripcion}}: {{ object.monto| stringformat:'d'  }}</span>
 
 
             <script>
 function p{{object.pk}}(){
 
-document.getElementById("id_formula").value += "{{ object.monto }}";
+document.getElementById("id_formula").value += "{{ object.monto| stringformat:'d'  }}";
 }
 </script>
 {% endfor %}

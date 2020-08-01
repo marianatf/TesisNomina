@@ -275,6 +275,9 @@ class Empleado(models.Model):
     cuenta = models.CharField(max_length=100, blank=True, null=True)
 
     def save(self, *args, **kwargs):
+        obj = Rac.objects.get(codigo_rac=self.codigo_rac.codigo_rac)
+        obj.cargo_ocupado = True
+        obj.save()
         if self.codigo_solicitud:
             self.cedula = self.codigo_solicitud.cedula
             self.apellido = self.codigo_solicitud.apellido
