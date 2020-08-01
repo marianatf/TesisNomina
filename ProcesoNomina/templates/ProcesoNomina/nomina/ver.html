@@ -2,7 +2,7 @@
 {% load widget_tweaks  %}
 {% block head_title %} Nómina {% endblock %}
 {% load static %}
-{% block title_page %} Información Nomina {% endblock %}
+{% block title_page %} Información de Nómina {% endblock %}
 {% block subtitle_page %} {% endblock %}
 
 {% block breadcrumb %}
@@ -16,7 +16,7 @@
 <div class="card">
     <div class="card-header">
             <span>Fecha: {{object.codigo_prenomina.fecha_final}} <br> Monto Total = {{total_emp}} <br> Descripción: {{object.codigo_prenomina.descripcion}}</span>
-        <div style="text-align: right;"><a href="{%url 'Pdf Nomina' object.pk %}"><button class="btn btn-primary btn-round">Exportar PDF</button></a></div>
+        <div style="text-align: right;"><a href="{%url 'Pdf Nomina' object.pk %}"><button class="btn btn-primary btn-round">Exportar PDF <i class="feather icon-printer"></i></button></a></div>
     </div>
     <div class="card-block">
         <div class="view-info">
@@ -37,7 +37,7 @@
                 <tbody>
                 {% for objeto in prenominapago %}
                 <tr>
-                    <td>{{ objeto.codigo_empleado.nombre}}, {{ objeto.codigo_empleado.apellido}}</td>
+                    <td><a href="{% url 'Ver Nomina Empleado' object.pk objeto.codigo_empleado.pk%}">({{objeto.codigo_empleado.pk}}) {{ objeto.codigo_empleado.nombre}} {{ objeto.codigo_empleado.segundo_nombre}} {{ objeto.codigo_empleado.apellido}} {{ objeto.codigo_empleado.segundo_apellido}}</a></td>
                     <td>{{ objeto.elemento_pago.descripcion}}</td>
                     <td>{{ objeto.monto}}</td>
                     <td>{{ objeto.elemento_pago.codigo_ad | title }}</td>

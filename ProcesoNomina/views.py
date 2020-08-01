@@ -32,7 +32,7 @@ class Pdf(View):
             'total_emp': total_empleados,
 
         }
-        return Render.render('ProcesoNomina/pdfall.html', params)
+        return Render.render('ProcesoNomina/pdf/prenomina.html', params)
 
 class PdfNomina(View):
 
@@ -50,9 +50,22 @@ class PdfNomina(View):
             'total_emp': total_empleados,
 
         }
-        return Render.render('ProcesoNomina/pdfall2.html', params)
+        return Render.render('ProcesoNomina/pdf/nomina.html', params)
 
+class PdfNominaEmpleado(View):
 
+    def get(self, request, pk, empleado):
+        obj = Nomina.objects.get(pk=pk).codigo_prenomina.pagos_empleados.filter(codigo_empleado__pk=empleado)
+        obj2 = Nomina.objects.get(pk=pk)
+        nombre = obj[0].codigo_empleado
+        total_emp = Nomina.objects.get(pk=pk).codigo_prenomina.pagos_empleados.filter(codigo_empleado__pk=empleado).aggregate(Sum('monto'))['monto__sum']
+        params = {
+            'objects': obj,
+            'object2': nombre,
+            'total': total_emp,
+            'nomina': obj2
+        }
+        return Render.render('ProcesoNomina/pdf/empleado.html', params)
 
 @login_required(login_url='Login')
 def PrenominaLista(request):
@@ -174,25 +187,29 @@ def NominaCrear(request):
 @login_required(login_url='Login')
 def EmpleadoPrenominaVer(request, pk, empleado):
     obj = Prenomina.objects.get(pk=pk).pagos_empleados.filter(codigo_empleado__pk=empleado)
+    obj2= Prenomina.objects.get(pk=pk)
     nombre = obj[0].codigo_empleado
     total_emp = Prenomina.objects.get(pk=pk).pagos_empleados.filter(codigo_empleado__pk=empleado).aggregate(Sum('monto'))['monto__sum']
     template_name = 'ProcesoNomina/empleado/ver.html'
     context = {
         'objects':obj,
         'object2':nombre,
-        'total':total_emp
+        'total':total_emp,
+        'nomina': obj2
     }
     return render(request, template_name , context)
 
 @login_required(login_url='Login')
 def EmpleadoNominaVer(request, pk, empleado):
     obj = Nomina.objects.get(pk=pk).codigo_prenomina.pagos_empleados.filter(codigo_empleado__pk=empleado)
+    obj2= Nomina.objects.get(pk=pk)
     nombre = obj[0].codigo_empleado
     total_emp = Nomina.objects.get(pk=pk).codigo_prenomina.pagos_empleados.filter(codigo_empleado__pk=empleado).aggregate(Sum('monto'))['monto__sum']
     template_name = 'ProcesoNomina/empleado/ver2.html'
     context = {
         'objects':obj,
         'object2':nombre,
-        'total':total_emp
+        'total':total_emp,
+        'nomina':obj2
     }
     return render(request, template_name , context)

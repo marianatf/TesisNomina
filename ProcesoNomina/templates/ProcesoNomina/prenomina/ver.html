@@ -15,7 +15,7 @@
 {% block content %}
 <div class="card">
     <div class="card-header">
-            <span>Descripción: {{object.descripcion}} <br>Fecha: {{object.fecha_final}} <br> Monto Total = {{total_emp}}</span>
+            <span>Fecha: {{object.fecha_final}} <br> Descripción: {{object.descripcion}} <br> Monto Total = {{total_emp}}</span>
         <div style="text-align: right;"><a href="{%url 'Pdf Todos' object.pk %}"><button class="btn btn-primary btn-round">Exportar PDF <i class="feather icon-printer"> </i></button></a></div>
     </div>
     <div class="card-block">
@@ -37,7 +37,7 @@
                 <tbody>
                 {% for objeto in prenominapago %}
                 <tr>
-                    <td>{{ objeto.codigo_empleado.nombre}}, {{ objeto.codigo_empleado.apellido}}</td>
+                    <td><a href="{% url 'Ver Prenomina Empleado' object.pk objeto.codigo_empleado.pk%}">({{objeto.codigo_empleado.pk}}) {{ objeto.codigo_empleado.nombre}} {{ objeto.codigo_empleado.segundo_nombre}} {{ objeto.codigo_empleado.apellido}} {{ objeto.codigo_empleado.segundo_apellido}}</a></td>
                     <td>{{ objeto.elemento_pago.descripcion}}</td>
                     <td>{{ objeto.monto}}</td>
                     <td>{{ objeto.elemento_pago.codigo_ad | title }}</td>

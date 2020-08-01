@@ -93,6 +93,7 @@ urlpatterns = [
 
     path('render/<int:pk>/',Pdf.as_view(), name='Pdf Todos'),
     path('render-nomina/<int:pk>/',PdfNomina.as_view(), name='Pdf Nomina'),
+    path('render-nomina/<int:pk>/empleado/<int:empleado>',PdfNominaEmpleado.as_view(), name='Pdf Nomina Empleado'),
 
     path('empleado/<int:pk>/familia', FamiliaEmpleadoVer, name='Familia Empleado'),
     path('empleado/<int:pk>/educacion', EducacionEmpleadoVer, name='Educacion Empleado'),

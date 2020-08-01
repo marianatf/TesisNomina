@@ -2,21 +2,21 @@
 {% load widget_tweaks  %}
 {% block head_title %} Pre-nómina {{object.pk}} {% endblock %}
 {% load static %}
-{% block title_page %} INFORMACIÓN DE PRE-NÓMINA {% endblock %}
-{% block subtitle_page %} {% endblock %}
+{% block title_page %} PRE-NÓMINA INDIVIDUAL DE EMPLEADO {% endblock %}
+{% block subtitle_page %} ({{object2.pk}}) {{object2.nombre}} {{object2.segundo_nombre}} {{object2.apellido}} {{object2.segundo_apellido}} {% endblock %}
 
 {% block breadcrumb %}
 <li class="breadcrumb-item"><a href="{% url 'Lista Prenomina'%}">Pre-nómina</a>
 </li>
-<li class="breadcrumb-item"><a href="#!">Visualización</a>
+<li class="breadcrumb-item"><a href="#!">Información individual</a>
 </li>
 {% endblock %}
 
 {% block content %}
 <div class="card">
     <div class="card-header">
-            <span>Empleado: {{object2.nombre}} {{object2.apellido}} <br> Monto Total = {{total}}</span>
-        <div style="text-align: right;"><a href=""><button class="btn btn-primary btn-round">Exportar PDF <i class="feather icon-printer"> </i></button></a></div>
+        <span>Fecha: {{nomina.fecha_final}} <br>Empleado: {{object2.nombre}} {{object2.segundo_nombre}} {{object2.apellido}} {{object2.segundo_apellido}}<br> Monto Total = {{total}}</span>
+        <!--<div style="text-align: right;"><a href=""><button class="btn btn-primary btn-round">Exportar PDF <i class="feather icon-printer"></i></button></a></div>-->
     </div>
     <div class="card-block">
         <div class="view-info">
